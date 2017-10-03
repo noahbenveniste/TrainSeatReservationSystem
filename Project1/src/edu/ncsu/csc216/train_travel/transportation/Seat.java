@@ -78,6 +78,8 @@ public class Seat implements Comparable<Seat> {
 	 * @param seats the array of seats
 	 * @return the list of seats as a string
 	 */
+	
+	//Possibly used to print seats in a reservation?
 	public static String printListOfSeats(Seat[] seats) { //TODO make input param more descriptive
 		//TODO implement
 		return null;
