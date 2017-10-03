@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.ncsu.csc216.train_travel.transportation;
 
 import static org.junit.Assert.*;
