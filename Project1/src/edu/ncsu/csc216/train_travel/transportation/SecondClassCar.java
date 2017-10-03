@@ -8,7 +8,7 @@ public class SecondClassCar extends TrainCar {
 	/** The number of seats in the car */
 	private static final int CAPACITY = NUM_ROWS*NUM_SEATS_PER_ROW;
 	/** The total number of seats and standing passengers the car can hold, defined by UC4,S4 */
-	private static final double RESERVE_LIMIT = CAPACITY*1.1;
+	private static final int RESERVE_LIMIT = (int) ((int) CAPACITY*1.1);
 	
 	/**
 	 * 
@@ -16,6 +16,30 @@ public class SecondClassCar extends TrainCar {
 	 */
 	public SecondClassCar(int carNumber) {
 		super(carNumber);
+	}
+	
+	/**
+	 * Getter for the NUM_ROWS instance variable
+	 * @return
+	 */
+	public static int getNumRows() {
+		return NUM_ROWS;
+	}
+	
+	/**
+	 * Getter for the NUM_SEATS_PER_ROW instance variable
+	 * @return
+	 */
+	public static int getNumSeatsPerRow() {
+		return NUM_SEATS_PER_ROW;
+	}
+	
+	/**
+	 * Getter for 
+	 * @return
+	 */
+	public static int getCapacity() {
+		return 0;
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public class FirstClassCar extends TrainCar {
 	 * Getter for the NUM_ROWS instance variable
 	 * @return
 	 */
-	public int getNumRows() {
+	public static int getNumRows() {
 		return NUM_ROWS;
 	}
 	
@@ -33,7 +33,7 @@ public class FirstClassCar extends TrainCar {
 	 * Getter for the NUM_SEATS_PER_ROW instance variable
 	 * @return
 	 */
-	public int getNumSeatsPerRow() {
+	public static int getNumSeatsPerRow() {
 		return NUM_SEATS_PER_ROW;
 	}
 	
@@ -41,7 +41,7 @@ public class FirstClassCar extends TrainCar {
 	 * Getter for the CAPACITY instance variable
 	 * @return
 	 */
-	public int getCapacity() {
+	public static int getCapacity() {
 		return CAPACITY;
 	}
 
