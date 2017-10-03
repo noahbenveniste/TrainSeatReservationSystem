@@ -143,7 +143,7 @@ public class Train {
 	 * 
 	 * @return
 	 */
-	public boolean isFirstClassCar() {
+	public boolean isFirstClassCar(int n) {
 		return false;
 	}
 	
