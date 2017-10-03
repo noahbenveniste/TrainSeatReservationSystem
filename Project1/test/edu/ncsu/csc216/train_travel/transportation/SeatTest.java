@@ -6,20 +6,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
+ * Unit tests for the methods of the Seat class
  * @author Noah Benveniste
- *
  */
 public class SeatTest {
-
 	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * Test method for {@link edu.ncsu.csc216.train_travel.transportation.Seat#Seat(java.lang.String, int)}.
+	 * Test method for the Seat constructor
 	 */
 	@Test
 	public void testSeat() {

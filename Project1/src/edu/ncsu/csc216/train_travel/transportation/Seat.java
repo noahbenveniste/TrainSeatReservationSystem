@@ -68,8 +68,7 @@ public class Seat implements Comparable<Seat> {
 	 */
 	@Override
 	public String toString() {
-		//TODO implement
-		return null;
+		return this.getTrainCarNumber() + "-" + this.getLabel();
 	}
 	
 	/**
@@ -78,20 +77,76 @@ public class Seat implements Comparable<Seat> {
 	 * @param seats the array of seats
 	 * @return the list of seats as a string
 	 */
-	
-	//Possibly used to print seats in a reservation?
-	public static String printListOfSeats(Seat[] seats) { //TODO make input param more descriptive
-		//TODO implement
-		return null;
+	public static String printListOfSeats(Seat[] seats) {
+		//Fence-post
+		String out = "[" + seats[0].toString();
+		for (int i = 1; i < seats.length; i++) {
+			out += "," + seats[i].toString();
+		}
+		//Close the string
+		out += "]";
+		return out;
 	}
 	
 	/**
-	 * 
+	 * Compares this Seat to another Seat first by car number and then by label.
+	 * This Seat is greater than the other if it exists in a car further up in the
+	 * train, if it exists in a row further up in the car, or if it is to the left
+	 * of the other if they are in the same row. Used for sorting arrays of seats.
+	 * @param o the other seat to compare to
+	 * @return a negative int if this Seat comes before the other Seat, a positive
+	 * int if this Seat comes after the other Seat, or zero if the Seats are equal.
 	 */
 	public int compareTo(Seat o) {
-		//TODO implement
-		return 0;
+		//First, compare by car number
+		if (this.getTrainCarNumber() != o.getTrainCarNumber()) {
+			return this.getTrainCarNumber() - o.getTrainCarNumber();
+		} else if (!this.getLabel().equals(o.getLabel())) { //If the seats are in the same car, compare by label
+			return this.getLabel().compareTo(o.getLabel());
+		} else { //If the seats are in the same car and have the same label, they are the same
+			return 0;
+		}
+	}
+
+	/**
+	 * Generates a hash code for this Seat across all fields
+	 * @return the hash code for this Seat
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((label == null) ? 0 : label.hashCode());
+		result = prime * result + (reserved ? 1231 : 1237);
+		result = prime * result + trainCarID;
+		return result;
+	}
+
+	/**
+	 * Compares two Seat objects for equality across all fields.
+	 * @param obj The other object to compare to
+	 * @return true if this Seat and the input seat are equal across all fields,
+	 * false if the input object is null, not of type Seat, or if this Seat
+	 * and the input Seat have unequal trainCarID, label or reserved status.
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Seat other = (Seat) obj;
+		if (label == null) {
+			if (other.label != null)
+				return false;
+		} else if (!label.equals(other.label))
+			return false;
+		if (reserved != other.reserved)
+			return false;
+		if (trainCarID != other.trainCarID)
+			return false;
+		return true;
 	} 
-	
-	//TODO generate hashCode() and equals()
 }
