@@ -90,4 +90,5 @@ public class SeatTest {
 		fail("Not yet implemented");
 	}
 
+	//TODO add tests for hashCode() and equals() once those are generated in Seat
 }

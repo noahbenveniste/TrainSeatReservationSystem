@@ -8,7 +8,7 @@ public class SecondClassCar extends TrainCar {
 	/** The number of seats in the car */
 	private static final int CAPACITY = NUM_ROWS*NUM_SEATS_PER_ROW;
 	/** The total number of seats and standing passengers the car can hold, defined by UC4,S4 */
-	private static final int RESERVE_LIMIT = CAPACITY*1.1;
+	private static final double RESERVE_LIMIT = CAPACITY*1.1;
 	
 	/**
 	 * 
@@ -16,5 +16,29 @@ public class SecondClassCar extends TrainCar {
 	 */
 	public SecondClassCar(int carNumber) {
 		super(carNumber);
+	}
+
+	@Override
+	public int openSeatsLeft() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public Seat seatFor(int row, int col) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Seat seatFor(String label) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String getSeatMap() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
