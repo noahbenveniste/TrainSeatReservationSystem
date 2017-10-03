@@ -92,6 +92,15 @@ public class Train {
 	 * @param n
 	 * @return
 	 */
+	public boolean hasEconomyClassRoomFor(int n) {
+		return false;
+	}
+	
+	/**
+	 * 
+	 * @param n
+	 * @return
+	 */
 	public boolean hasBicycleCarRoomFor(int n) {
 		return false;
 	}
