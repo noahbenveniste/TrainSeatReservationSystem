@@ -9,6 +9,8 @@ public class SecondClassCar extends TrainCar {
 	private static final int CAPACITY = NUM_ROWS*NUM_SEATS_PER_ROW;
 	/** The total number of seats and standing passengers the car can hold, defined by UC4,S4 */
 	private static final int RESERVE_LIMIT = (int) ((int) CAPACITY*1.1);
+	/** Array to store seats for the car */
+	private Seat[][] seats;
 	
 	/**
 	 * 

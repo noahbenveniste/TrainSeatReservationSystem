@@ -8,9 +8,13 @@ import edu.ncsu.csc216.train_travel.transportation.Train;
  */
 public class BicycleClass extends Reservation {
 
-	public BicycleClass(int numPassengers, Train train) {
+	private BicycleClass(int numPassengers, Train train) {
 		super(numPassengers, train);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public static BicycleClass newReservation(int numPassengers, Train train) {
+		return null;
 	}
 
 	@Override

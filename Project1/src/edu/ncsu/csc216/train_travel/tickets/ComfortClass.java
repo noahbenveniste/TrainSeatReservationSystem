@@ -4,9 +4,13 @@ import edu.ncsu.csc216.train_travel.transportation.Train;
 
 public class ComfortClass extends Reservation{
 
-	public ComfortClass(int numPassengers, Train train) {
+	private ComfortClass(int numPassengers, Train train) {
 		super(numPassengers, train);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public static ComfortClass newReservation(int numPassengers, Train train) {
+		return null;
 	}
 
 	@Override

@@ -40,7 +40,6 @@ public class BicycleTransportCar extends TrainCar {
 
 	@Override
 	public String getSeatMap() {
-		// TODO Auto-generated method stub
-		return null;
+		return SEAT_ERROR_MESSAGE;
 	}
 }

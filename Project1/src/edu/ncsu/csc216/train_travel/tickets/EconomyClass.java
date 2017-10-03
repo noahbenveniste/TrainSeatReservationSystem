@@ -3,10 +3,16 @@ package edu.ncsu.csc216.train_travel.tickets;
 import edu.ncsu.csc216.train_travel.transportation.Train;
 
 public class EconomyClass extends Reservation{
+	/** */
+	private boolean reservedSeats;
 
-	public EconomyClass(int numPassengers, Train train) {
+	private EconomyClass(int numPassengers, Train train) {
 		super(numPassengers, train);
 		// TODO Auto-generated constructor stub
+	}
+	
+	public static EconomyClass newReservation(int numPassengers, Train train) {
+		return null;
 	}
 
 	@Override
