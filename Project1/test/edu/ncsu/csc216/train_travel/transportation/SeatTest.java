@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * @author Noah
+ * @author Noah Benveniste
  *
  */
 public class SeatTest {
