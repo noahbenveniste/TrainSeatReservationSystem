@@ -4,17 +4,17 @@ package edu.ncsu.csc216.train_travel.transportation;
  * @author Noah Benveniste
  */
 public abstract class TrainCar {
-	/** Constant for the column index for seating column A */
-	private static final int ASCII_A = 1;
+	/** ASCII value for a */
+	private static final int ASCII_A = 65;
 	/** The number of the car's order in the Train */
 	private int carNumber;
 	
 	/**
 	 * 
-	 * @param n
+	 * @param carNumber
 	 */
-	public TrainCar(int n) {
-		//TODO implement
+	public TrainCar(int carNumber) {
+		this.carNumber = carNumber;
 	}
 	
 	/**
