@@ -1,5 +1,8 @@
 package edu.ncsu.csc216.train_travel.tickets;
 
+import edu.ncsu.csc216.train_travel.transportation.Seat;
+import edu.ncsu.csc216.train_travel.transportation.Train;
+
 /**
  * @author Noah Benveniste
  */
@@ -76,7 +79,7 @@ public abstract class Reservation {
 	 * @return
 	 */
 	protected Seat[] parseSeats(String s) { //TODO make input param more descriptive
-		
+		return null;
 	}
 	
 	/**
@@ -86,6 +89,6 @@ public abstract class Reservation {
 	 * @return
 	 */
 	protected Seat[] reassignSeats(Seat[] s1, Seat[] s2) { //TODO make input param more descriptive
-		
+		return null;
 	}
 }
