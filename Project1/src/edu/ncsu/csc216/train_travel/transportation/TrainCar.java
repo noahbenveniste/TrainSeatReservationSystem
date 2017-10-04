@@ -140,7 +140,76 @@ public abstract class TrainCar {
 	 * numerical row,column index corresponding to the label if the label is valid
 	 */
 	private int[] parseLabel(String label, int numRows, int numCols) {
-		//Model this method as an FSM
-		return new int[0];
+		//Use an FSM to check that the label contains one or two digits followed by a letter
+		final int STATE_0 = 0;
+		final int STATE_1 = 1;
+		final int STATE_2 = 2;
+		final int STATE_3 = 3;
+		final int ERROR = 4;
+		
+		int state = STATE_0;
+		
+		for (int i = 0; i < label.length(); i++) {
+			char ch = label.charAt(i);
+			switch (state) {
+				case STATE_0:
+					if (Character.isDigit(ch) && i != label.length()-1) {
+						state = STATE_1;
+					} else {
+						state = ERROR;
+					}
+					break;
+				case STATE_1:
+					if (Character.isDigit(ch) && i != label.length()-1) {
+						state = STATE_2;
+					} else if (Character.isLetter(ch) && i == label.length()-1) {
+						state = STATE_3;
+					} else {
+						state = ERROR;
+					}
+					break;
+				case STATE_2:
+					if (Character.isLetter(ch) && i == label.length()-1) {
+						state = STATE_3;
+					} else {
+						state = ERROR;
+					}
+					break;
+				case STATE_3:
+					//Do nothing
+					break;
+				case ERROR:
+					return new int[0];
+			}
+		}
+		
+		String numString = "";
+		String letterString = "";
+		int rowNum = 0;
+		int colNum = 0;
+		
+		if (label.length() == 2) {
+			numString = "" + label.charAt(0);
+			letterString = "" + label.charAt(1);
+		} else if (label.length() == 3) {
+			numString = "" + label.charAt(0) + label.charAt(1);
+			letterString = "" + label.charAt(2);
+		}
+		
+		rowNum = Integer.parseInt(numString);
+		if (rowNum < numRows || rowNum > numRows) {
+			return new int[0];
+		}
+		
+		if (numCols == 3 && letterString != "A" && letterString != "B" && letterString != "C") {
+			return new int[0];
+		} else if (numCols == 4 && letterString != "A" && letterString != "B" && letterString != "C" && letterString != "D") {
+			return new int[0];
+		}
+		
+		int[] out = new int[2];
+		out[0] = rowNum;
+		out[1] = colNum;
+		return out;
 	}
 }
