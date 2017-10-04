@@ -18,7 +18,7 @@ public class TrainCarTest {
 	 */
 	@Test
 	public void testTrainCar() {
-		fail("Not yet implemented");
+		
 	}
 
 	/**

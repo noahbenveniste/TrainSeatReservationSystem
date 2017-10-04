@@ -183,29 +183,40 @@ public abstract class TrainCar {
 			}
 		}
 		
+		//Now that the label is guaranteed to consisted of one or two digits followed by a letter, check that they are valid
+		//String representation of row number
 		String numString = "";
-		String letterString = "";
+		//Char to store the seat letter
+		char letter = ' ';
+		//int to store the integer representation of the row number as an array index
 		int rowNum = 0;
+		//int to store the integer representation of the seat letter as an array index
 		int colNum = 0;
 		
 		if (label.length() == 2) {
 			numString = "" + label.charAt(0);
-			letterString = "" + label.charAt(1);
+			letter = label.charAt(1);
 		} else if (label.length() == 3) {
 			numString = "" + label.charAt(0) + label.charAt(1);
-			letterString = "" + label.charAt(2);
+			letter = label.charAt(2);
 		}
 		
-		rowNum = Integer.parseInt(numString);
+		//Set rowNum and make sure it's valid based on the Seat array's dimensions; 
+		//Remember to subtract off 1 to make it into an array index
+		rowNum = Integer.parseInt(numString) - 1;
 		if (rowNum < numRows || rowNum > numRows) {
 			return new int[0];
 		}
 		
-		if (numCols == 3 && letterString != "A" && letterString != "B" && letterString != "C") {
+		//Check that the letter is valid
+		if (numCols == 3 && letter != 'A' && letter != 'B' && letter != 'C') {
 			return new int[0];
-		} else if (numCols == 4 && letterString != "A" && letterString != "B" && letterString != "C" && letterString != "D") {
+		} else if (numCols == 4 && letter != 'A' && letter != 'B' && letter != 'C' && letter != 'D') {
 			return new int[0];
 		}
+		
+		//Map the letter to its numerical value
+		colNum = ASCII_A - ((int) (letter));
 		
 		int[] out = new int[2];
 		out[0] = rowNum;
