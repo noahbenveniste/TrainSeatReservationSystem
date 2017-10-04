@@ -42,7 +42,7 @@ public class TrainCarTest {
 	 */
 	@Test
 	public void testDrawSeatChart() {
-		fail("Not yet implemented");
+		fail();
 	}
 
 	/**

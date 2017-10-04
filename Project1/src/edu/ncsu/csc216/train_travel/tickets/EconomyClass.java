@@ -6,13 +6,24 @@ public class EconomyClass extends Reservation{
 	/** */
 	private boolean reservedSeats;
 
+	/**
+	 * 
+	 * @param numPassengers
+	 * @param train
+	 */
 	private EconomyClass(int numPassengers, Train train) {
 		super(numPassengers, train);
-		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * 
+	 * @param numPassengers
+	 * @param train
+	 * @return
+	 */
 	public static EconomyClass newReservation(int numPassengers, Train train) {
-		return null;
+		EconomyClass eco = new EconomyClass(numPassengers, train);
+		return eco;
 	}
 
 	@Override

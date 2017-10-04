@@ -41,7 +41,7 @@ public class SecondClassCar extends TrainCar {
 	 * @return
 	 */
 	public static int getCapacity() {
-		return 0;
+		return RESERVE_LIMIT;
 	}
 
 	@Override
