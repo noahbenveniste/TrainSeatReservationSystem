@@ -2,6 +2,10 @@ package edu.ncsu.csc216.train_travel.manager;
 
 import edu.ncsu.csc216.train_travel.tickets.Reservation;
 
+/**
+ * 
+ * @author Noah Benveniste
+ */
 public class ReservationManager implements TicketMaster {
 	/** The maximum number of passengers for any reservation, defined by UC3,S1 */
 	private static final int MAX_PASSENGERS_PER_RESERVATION = 6;

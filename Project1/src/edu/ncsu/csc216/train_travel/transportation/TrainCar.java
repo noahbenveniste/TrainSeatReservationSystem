@@ -1,6 +1,8 @@
 package edu.ncsu.csc216.train_travel.transportation;
 
 /**
+ * Abstract parent class for FirstClassCar, SecondClassCar and BicycleTransportCar.
+ * Stores state for the car number.
  * @author Noah Benveniste
  */
 public abstract class TrainCar {
@@ -10,8 +12,9 @@ public abstract class TrainCar {
 	private int carNumber;
 	
 	/**
-	 * 
-	 * @param carNumber
+	 * Constructor for a TrainCar parent object. Called by the 
+	 * constructors of FirstClassCar, SecondClassCar and BicycleTransportCar
+	 * @param carNumber the number corresponding to the car's order in the train
 	 */
 	public TrainCar(int carNumber) {
 		this.carNumber = carNumber;
@@ -68,7 +71,7 @@ public abstract class TrainCar {
 				String label = "" + (i + 1);
 				//The letter portion of the label is determined by the seat column, or the inner loop variable
 				label += (char) (ASCII_A + j);
-				s[i][j] = new Seat(label ,this.getCarIDNumber());
+				s[i][j] = new Seat(label , this.getCarIDNumber());
 			}
 		}
 	}
@@ -79,7 +82,7 @@ public abstract class TrainCar {
 	 * in each child TrainCar class
 	 * @param seats a 2D array of seats
 	 * @param aisleIndex the location of the aisle column in the seating map
-	 * @return
+	 * @return the seating map as a single concatenated string to be printed
 	 */
 	protected String drawSeatChart(Seat[][] seats, int aisleIndex) {
 		//aisleIndex = 1 for first class, 2 for second class
@@ -112,7 +115,9 @@ public abstract class TrainCar {
 	
 	/**
 	 * Returns the seat in an array of seats corresponding to a given label
-	 * @param label
+	 * Called by the public seatFor() methods implemented by FirstClassCar and
+	 * SecondClassCar
+	 * @param label the label corresponding to the Seat object to be returned
 	 * @param seats an array of seat objects for a car
 	 * @return the seat at the given label in the array of seats
 	 * @throws IllegalArgumentException if the label is improper for the car
@@ -120,7 +125,7 @@ public abstract class TrainCar {
 	protected Seat seatFor(String label, Seat[][] seats) {
 		//Call private helper method to check if label is valid for the train car
 		if (parseLabel(label, seats.length, seats[0].length).length == 0) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Label is not proper for the car.");
 		}
 		//If the label is valid, use the number corresponding to the row and the letter
 		//corresponding to the column to index directly into the Seat array and get the
@@ -141,45 +146,47 @@ public abstract class TrainCar {
 	 */
 	private int[] parseLabel(String label, int numRows, int numCols) {
 		//Use an FSM to check that the label contains one or two digits followed by a letter
-		final int STATE_0 = 0;
-		final int STATE_1 = 1;
-		final int STATE_2 = 2;
-		final int STATE_3 = 3;
-		final int ERROR = 4;
+		final int state0 = 0;
+		final int state1 = 1;
+		final int state2 = 2;
+		final int state3 = 3;
+		final int errorState = 4;
 		
-		int state = STATE_0;
+		int state = state0;
 		
 		for (int i = 0; i < label.length(); i++) {
 			char ch = label.charAt(i);
 			switch (state) {
-				case STATE_0:
-					if (Character.isDigit(ch) && i != label.length()-1) {
-						state = STATE_1;
+				case state0:
+					if (Character.isDigit(ch) && i != label.length() - 1) {
+						state = state1;
 					} else {
-						state = ERROR;
+						state = errorState;
 					}
 					break;
-				case STATE_1:
-					if (Character.isDigit(ch) && i != label.length()-1) {
-						state = STATE_2;
-					} else if (Character.isLetter(ch) && i == label.length()-1) {
-						state = STATE_3;
+				case state1:
+					if (Character.isDigit(ch) && i != label.length() - 1) {
+						state = state2;
+					} else if (Character.isLetter(ch)) {
+						state = state3;
 					} else {
-						state = ERROR;
+						state = errorState;
 					}
 					break;
-				case STATE_2:
-					if (Character.isLetter(ch) && i == label.length()-1) {
-						state = STATE_3;
+				case state2:
+					if (Character.isLetter(ch) && i == label.length() - 1) {
+						state = state3;
 					} else {
-						state = ERROR;
+						state = errorState;
 					}
 					break;
-				case STATE_3:
+				case state3:
 					//Do nothing
 					break;
-				case ERROR:
+				case errorState:
 					return new int[0];
+				default:
+					//Do nothing
 			}
 		}
 		
@@ -188,10 +195,10 @@ public abstract class TrainCar {
 		String numString = "";
 		//Char to store the seat letter
 		char letter = ' ';
-		//int to store the integer representation of the row number as an array index
-		int rowNum = 0;
-		//int to store the integer representation of the seat letter as an array index
-		int colNum = 0;
+		//Integer to store the integer representation of the row number as an array index
+		int rowNumIndex = 0;
+		//Integer to store the integer representation of the seat letter as an array index
+		int colNumIndex = 0;
 		
 		if (label.length() == 2) {
 			numString = "" + label.charAt(0);
@@ -203,8 +210,8 @@ public abstract class TrainCar {
 		
 		//Set rowNum and make sure it's valid based on the Seat array's dimensions; 
 		//Remember to subtract off 1 to make it into an array index
-		rowNum = Integer.parseInt(numString) - 1;
-		if (rowNum < numRows || rowNum > numRows) {
+		rowNumIndex = Integer.parseInt(numString) - 1;
+		if (rowNumIndex < 0 || rowNumIndex >= numRows) { //Check that the 
 			return new int[0];
 		}
 		
@@ -216,11 +223,12 @@ public abstract class TrainCar {
 		}
 		
 		//Map the letter to its numerical value
-		colNum = ASCII_A - ((int) (letter));
+		//Subtract off 1 to make it an array index
+		colNumIndex = ASCII_A - ((int) (letter)) - 1;
 		
 		int[] out = new int[2];
-		out[0] = rowNum;
-		out[1] = colNum;
+		out[0] = rowNumIndex;
+		out[1] = colNumIndex;
 		return out;
 	}
 }

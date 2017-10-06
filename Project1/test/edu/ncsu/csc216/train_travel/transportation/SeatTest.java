@@ -2,7 +2,6 @@ package edu.ncsu.csc216.train_travel.transportation;
 
 import static org.junit.Assert.*;
 
-import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -22,7 +21,7 @@ public class SeatTest {
 	@Test
 	public void testSeat() {
 		//Test the construction of a valid Seat
-		Seat s = new Seat(LABEL,CAR_NUMBER);
+		Seat s = new Seat(LABEL, CAR_NUMBER);
 		assertEquals(LABEL, s.getLabel());
 		assertEquals(CAR_NUMBER, s.getTrainCarNumber());
 		assertFalse(s.isReserved());
@@ -33,7 +32,7 @@ public class SeatTest {
 	 */
 	@Test
 	public void testReserve() {
-		Seat s = new Seat(LABEL,CAR_NUMBER);
+		Seat s = new Seat(LABEL, CAR_NUMBER);
 		assertFalse(s.isReserved());
 		s.reserve();
 		assertTrue(s.isReserved());
@@ -44,7 +43,7 @@ public class SeatTest {
 	 */
 	@Test
 	public void testRelease() {
-		Seat s = new Seat(LABEL,CAR_NUMBER);
+		Seat s = new Seat(LABEL, CAR_NUMBER);
 		assertFalse(s.isReserved());
 		s.reserve();
 		assertTrue(s.isReserved());
@@ -57,7 +56,7 @@ public class SeatTest {
 	 */
 	@Test
 	public void testIsReserved() {
-		Seat s = new Seat(LABEL,CAR_NUMBER);
+		Seat s = new Seat(LABEL, CAR_NUMBER);
 		assertFalse(s.isReserved());
 		s.reserve();
 		assertTrue(s.isReserved());
@@ -88,7 +87,7 @@ public class SeatTest {
 	 */
 	@Test
 	public void testToString() {
-		Seat s = new Seat(LABEL,CAR_NUMBER);
+		Seat s = new Seat(LABEL, CAR_NUMBER);
 		assertEquals(ACTUAL_STRING, s.toString());
 	}
 

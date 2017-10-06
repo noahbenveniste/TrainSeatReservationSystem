@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.ncsu.csc216.train_travel.transportation;
 
 import static org.junit.Assert.*;
@@ -8,8 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * @author Noah
- *
+ * Unit tests for the FirstClassCar class
+ * @author Noah Benveniste
  */
 public class FirstClassCarTest {
 
