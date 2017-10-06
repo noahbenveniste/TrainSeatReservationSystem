@@ -53,12 +53,13 @@ public abstract class Reservation {
 	}
 	
 	/**
-	 * 
-	 * @param numPassengers
-	 * @return
+	 * Method that determines if the number of passengers to be added to a Reservation is valid
+	 * @param numPassengers the number of passengers to be added
+	 * @return true if the number of passengers is greater than zero and less than or equal to 6,
+	 * false otherwise
 	 */
 	public static boolean numPassengersInRange(int numPassengers) {
-		return false;
+		return (numPassengers > 0 && numPassengers <= MAX_PASSENGERS);
 	}
 	
 	/**
