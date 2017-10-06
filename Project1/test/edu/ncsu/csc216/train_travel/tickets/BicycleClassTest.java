@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.ncsu.csc216.train_travel.tickets;
 
 import static org.junit.Assert.*;
@@ -8,8 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
+ * Unit tests for the BicycleClass class of Reservation
  * @author Noah
- *
  */
 public class BicycleClassTest {
 
