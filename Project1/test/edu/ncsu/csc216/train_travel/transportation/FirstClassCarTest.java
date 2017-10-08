@@ -124,7 +124,80 @@ public class FirstClassCarTest {
 	 */
 	@Test
 	public void testSeatForIntInt() {
-		fail("Not yet implemented");
+		//Initialize object
+		FirstClassCar car = new FirstClassCar(1);
+		
+		//Valid upper boundary row, upper boundary column
+		Seat seat1 = car.seatFor(0, 0);
+		assertEquals(new Seat("1A", 1), seat1);
+		
+		//Valid upper boundary row, middle value column
+		Seat seat2 = car.seatFor(0, 1);
+		assertEquals(new Seat("1B", 1), seat2);
+		
+		//Valid upper boundary row, lower boundary column
+		Seat seat3 = car.seatFor(0, 2);
+		assertEquals(new Seat("1C", 1), seat3);
+		
+		//Valid middle value row, upper boundary column
+		Seat seat4 = car.seatFor(9, 0);
+		assertEquals(new Seat("10A", 1), seat4);
+		
+		//Valid middle value row, middle value column
+		Seat seat5 = car.seatFor(9, 1);
+		assertEquals(new Seat("10B", 1), seat5);
+		
+		//Valid middle value row, lower value column
+		Seat seat6 = car.seatFor(9, 2);
+		assertEquals(new Seat("10C", 1), seat6);
+		
+		//Valid lower boundary row, upper boundary column
+		Seat seat7 = car.seatFor(16, 0);
+		assertEquals(new Seat("17A", 1), seat7);
+		
+		//Valid lower boundary row, middle value column
+		Seat seat8 = car.seatFor(16, 1);
+		assertEquals(new Seat("17B", 1), seat8);
+		
+		//Valid lower boundary row, lower boundary column
+		Seat seat9 = car.seatFor(16, 2);
+		assertEquals(new Seat("17C", 1), seat9);
+		
+		//Invalid upper boundary row, upper boundary column
+		Seat seat10 = null;
+		try {
+			seat10 = car.seatFor(-1, -1);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat10);
+		}
+		
+		//Invalid upper boundary row, lower boundary column
+		Seat seat11 = null;
+		try {
+			seat11 = car.seatFor(-1, 4);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat11);
+		}
+		
+		//Invalid lower boundary row, upper boundary column
+		Seat seat12 = null;
+		try {
+			seat12 = car.seatFor(17, -1);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat12);
+		}
+		
+		//Invalid lower boundary row, lower boundary column
+		Seat seat13 = null;
+		try {
+			seat13 = car.seatFor(17, 4);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat13);
+		}
 	}
 
 	/**
@@ -132,11 +205,48 @@ public class FirstClassCarTest {
 	 */
 	@Test
 	public void testSeatForString() {
-		fail("Not yet implemented");
+		//Initialize object
+		FirstClassCar car = new FirstClassCar(1);
+		
+		//Valid upper boundary row, upper boundary column
+		Seat seat1 = car.seatFor("1-1A");
+		assertEquals(new Seat("1A", 1), seat1);
+		
+		//Valid upper boundary row, middle value column
+		Seat seat2 = car.seatFor("1-1B");
+		assertEquals(new Seat("1B", 1), seat2);
+		
+		//Valid upper boundary row, lower boundary column
+		Seat seat3 = car.seatFor("1-1C");
+		assertEquals(new Seat("1C", 1), seat3);
+		
+		//Valid middle value row, upper boundary column
+		Seat seat4 = car.seatFor("1-10A");
+		assertEquals(new Seat("10A", 1), seat4);
+		
+		//Valid middle value row, middle value column
+		Seat seat5 = car.seatFor("1-10B");
+		assertEquals(new Seat("10B", 1), seat5);
+		
+		//Valid middle value row, lower value column
+		Seat seat6 = car.seatFor("1-10C");
+		assertEquals(new Seat("10C", 1), seat6);
+		
+		//Valid lower boundary row, upper boundary column
+		Seat seat7 = car.seatFor("1-17A");
+		assertEquals(new Seat("17A", 1), seat7);
+		
+		//Valid lower boundary row, middle value column
+		Seat seat8 = car.seatFor("1-17B");
+		assertEquals(new Seat("17B", 1), seat8);
+		
+		//Valid lower boundary row, lower boundary column
+		Seat seat9 = car.seatFor("1-17C");
+		assertEquals(new Seat("17C", 1), seat9);
 	}
 
 	/**
-	 * Test method for getSeatMap()
+	 * Test method for getSeatMap
 	 */
 	@Test
 	public void testGetSeatMap() {

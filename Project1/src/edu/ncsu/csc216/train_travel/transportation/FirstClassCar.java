@@ -84,7 +84,11 @@ public class FirstClassCar extends TrainCar {
 	 */
 	@Override
 	public Seat seatFor(int row, int col) {
-		return this.seats[row][col];
+		if (row < 0 || row > NUM_ROWS || col < 0 || col > NUM_SEATS_PER_ROW) {
+			throw new IllegalArgumentException();
+		} else {
+			return this.seats[row][col];
+		}
 	}
 
 	/**
