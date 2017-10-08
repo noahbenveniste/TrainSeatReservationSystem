@@ -17,7 +17,11 @@ public abstract class TrainCar {
 	 * @param carNumber the number corresponding to the car's order in the train
 	 */
 	public TrainCar(int carNumber) {
-		this.carNumber = carNumber;
+		if (carNumber < 1 || carNumber > 12) {
+			throw new IllegalArgumentException("Invalid car number");
+		} else {
+			this.carNumber = carNumber;
+		}
 	}
 	
 	/**

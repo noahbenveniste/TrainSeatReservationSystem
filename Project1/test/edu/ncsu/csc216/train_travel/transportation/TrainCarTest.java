@@ -11,7 +11,7 @@ import org.junit.Test;
 public class TrainCarTest {
 
 	/**
-	 * Test method for {@link edu.ncsu.csc216.train_travel.transportation.TrainCar#TrainCar(int)}.
+	 * Test method for constructor
 	 */
 	@Test
 	public void testTrainCar() {
