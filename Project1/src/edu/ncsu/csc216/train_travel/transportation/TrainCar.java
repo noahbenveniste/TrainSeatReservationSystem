@@ -92,14 +92,14 @@ public abstract class TrainCar {
 				//Check if the column iteration is on the aisle
 				if (j != aisleIndex) {
 					//Check if the seat is reserved or not
-					if (seats[i][j].isReserved()) {
+					if (!seats[i][j].isReserved()) {
 						//Label consists of a one digit number and a letter
 						if (seats[i][j].getLabel().length() == 2) {
 							s += "[ " + seats[i][j].getLabel() + "]";
 						} else if (seats[i][j].getLabel().length() == 3) { //Label consists of a two digit number and a letter
 							s += "[" + seats[i][j].getLabel() + "]";
 						}
-					} else { //If the seat is not reserved, put in an 'x'
+					} else { //If the seat is reserved, put in an 'x'
 						s += "[ x ]";
 					}
 				} else { //If the column iteration is on the aisle, print empty space and then decrement the column counter so a seat isn't skipped

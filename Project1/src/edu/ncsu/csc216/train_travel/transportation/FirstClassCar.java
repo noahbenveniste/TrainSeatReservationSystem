@@ -16,6 +16,8 @@ public class FirstClassCar extends TrainCar {
 	private static final int NUM_SEATS_PER_ROW = 3;
 	/** The number of passengers the car can seat, defined by UC3,E3 */
 	private static final int CAPACITY = NUM_ROWS * NUM_SEATS_PER_ROW;
+	/** Zero-based index of the car's aisle, used by the seat map */
+	private static final int AISLE_INDEX = 1;
 	/** Array to store seats for the car */
 	private Seat[][] seats;
 	
@@ -62,8 +64,15 @@ public class FirstClassCar extends TrainCar {
 	 */
 	@Override
 	public int openSeatsLeft() {
-		// TODO Auto-generated method stub
-		return 0;
+		int openSeatCount = 0;
+		for (int i = 0; i < this.seats.length; i++) {
+			for (int j = 0; j < this.seats[i].length; j++) {
+				if (!seats[i][j].isReserved()) {
+					openSeatCount++;
+				}
+			}
+		}
+		return openSeatCount;
 	}
 
 	/**
@@ -75,8 +84,7 @@ public class FirstClassCar extends TrainCar {
 	 */
 	@Override
 	public Seat seatFor(int row, int col) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.seats[row][col];
 	}
 
 	/**
@@ -97,7 +105,6 @@ public class FirstClassCar extends TrainCar {
 	 */
 	@Override
 	public String getSeatMap() {
-		// TODO Auto-generated method stub
-		return null;
+		return "First Class Car #" + this.getCarIDNumber() + "\n" + "\n" + drawSeatChart(this.seats, AISLE_INDEX);
 	}
 }

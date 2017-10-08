@@ -66,7 +66,6 @@ public class BicycleTransportCar extends TrainCar {
 	 */
 	@Override
 	public String getSeatMap() {
-		//TODO implement a proper return
-		return null;
+		return "Bicycle Transport Car #" + this.getCarIDNumber() + "\n" + "Seats cannot be reserved.";
 	}
 }
