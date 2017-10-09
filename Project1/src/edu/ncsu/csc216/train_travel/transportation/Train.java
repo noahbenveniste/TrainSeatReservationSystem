@@ -21,6 +21,13 @@ public class Train {
 	/** Number of passengers with BicycleClass Reservations */
 	private int bicyclePassengers;
 	
+	/** Equal to the sum of the capacities of all FirstClassCars in the Train */
+	private final int TOTAL_COMFORT_CAPACITY;
+	/** Equal to the sum of all economy car capacities + the bicycle car overflow capacity of 20 */
+	private final int TOTAL_ECONOMY_CAPACITY;
+	/** Only one bicycle car per train with a capacity of 20 */
+	private final int TOTAL_BICYCLE_CAPACITY;
+	
 	/**
 	 * Constructs a Train object of a specified length with no passengers
 	 * @param numberOfCars the length of the Train in number of cars
@@ -36,6 +43,13 @@ public class Train {
 			this.comfortClassPassengers = 0;
 			this.econcomyClassPassengers = 0;
 			this.bicyclePassengers = 0;
+			
+			//Equal to the sum of the capacities of all FirstClassCars in the Train
+			this.TOTAL_COMFORT_CAPACITY = FirstClassCar.getCapacity() * this.numFirstClassCars;
+			//Equal to the sum of all economy car capacities + the bicycle car overflow capacity of 20
+			this.TOTAL_ECONOMY_CAPACITY = SecondClassCar.getCapacity() * (this.numCars() - this.numFirstClassCars - 1) + 20;
+			//Only one bicycle car per train with a capacity of 20
+			this.TOTAL_BICYCLE_CAPACITY = 20;
 		}
 	}
 	
@@ -105,8 +119,11 @@ public class Train {
 	 * @return the seat located at row,col in the specified car
 	 * @throws IllegalArgumentException if row,col is out of bounds or carNum is out of bounds
 	 */
-	public Seat getSeatFor(int carNum, int row, int col) {
-		return null;
+	public Seat getSeatFor(int carNum, int row, int col) throws IllegalArgumentException {
+		if (carNum < 0 || carNum > car.length) { //Check that the carNum index is in range
+			throw new IllegalArgumentException();
+		}
+		return this.car[carNum].seatFor(row, col); //Throws IAE if row,col out of bounds for the seating array
 	}
 	
 	/**
@@ -117,8 +134,11 @@ public class Train {
 	 * @throws IllegalArgumentException if the seat label is invalid for the specified car or
 	 * if carNum is out of bounds
 	 */
-	public Seat getSeatFor(int carNum, String label) {
-		return null;
+	public Seat getSeatFor(int carNum, String label) throws IllegalArgumentException {
+		if (carNum < 0 || carNum > car.length) { //Check that the carNum index is in range
+			throw new IllegalArgumentException();
+		}
+		return this.car[carNum].seatFor(label); //Throws IAE if label is improper for the car or invalid form
 	}
 	
 	/**
@@ -127,16 +147,19 @@ public class Train {
 	 * @return true if the Train has room for the additional passengers, false otherwise
 	 */
 	public boolean hasComfortClassRoomFor(int numPassengers) {
-		return false;
+		//Check that the sum of the current number of comfort passengers plus the passengers 
+		//to be added is less than or equal to the total available capacity for comfort class
+		return (this.comfortClassPassengers + numPassengers) <= this.TOTAL_COMFORT_CAPACITY;
 	}
 	
 	/**
-	 * Determines if the Train can hold a specified number more of EconomyClass passengers
+	 * Determines if the Train can hold a specified number more of EconomyClass passengers for
+	 * unreserved reservations
 	 * @param numPassengers the number of passengers to check if there is room for
 	 * @return true if the Train has room for the additional passengers, false otherwise
 	 */
 	public boolean hasEconomyClassRoomFor(int numPassengers) {
-		return false;
+		return (this.econcomyClassPassengers + numPassengers) <= this.TOTAL_ECONOMY_CAPACITY;
 	}
 	
 	/**
@@ -145,7 +168,7 @@ public class Train {
 	 * @return true if the Train has room for the additional passengers, false otherwise
 	 */
 	public boolean hasBicycleCarRoomFor(int numPassengers) {
-		return false;
+		return (this.bicyclePassengers + numPassengers) <= this.TOTAL_BICYCLE_CAPACITY;
 	}
 	
 	/**
@@ -153,7 +176,12 @@ public class Train {
 	 * @return the number of unreserved second class seats
 	 */
 	public int openSecondClassSeats() {
-		return 0;
+		int openSeatCount = 0;
+		//Loop through the first class cars
+		for (int i = 0; i < this.numFirstClassCars; i++) {
+			openSeatCount += this.car[i].openSeatsLeft();
+		}
+		return openSeatCount;
 	}
 	
 	/**
@@ -161,16 +189,21 @@ public class Train {
 	 * @return the number of unreserved first class seats
 	 */
 	public int openFirstClassSeats() {
-		return 0;
+		int openSeatCount = 0;
+		//Loop through the second class cars
+		for (int i = this.numFirstClassCars; i < this.numCars() - 1; i++) {
+			openSeatCount += this.car[i].openSeatsLeft();
+		}
+		return openSeatCount;
 	}
 	
 	/**
 	 * Determines if the car at the specified ZERO-BASED INDEX is a BicycleTransportCar
 	 * @param carIndex the zero-based index of the car in the car array
-	 * @return true if the car at the index is a BicycleClassCar, false otherwise
+	 * @return true if the car at the index is a BicycleTransportCar, false otherwise
 	 */
 	public boolean isBicycleCar(int carIndex) {
-		return false;
+		return this.car[carIndex] instanceof BicycleTransportCar;
 	}
 	
 	/**
@@ -179,7 +212,7 @@ public class Train {
 	 * @return true if the car at the index is a SecondClassCar, false otherwise
 	 */
 	public boolean isSecondClassCar(int carIndex) {
-		return false;
+		return this.car[carIndex] instanceof SecondClassCar;
 	}
 	
 	/**
@@ -188,7 +221,7 @@ public class Train {
 	 * @return true if the car at the index is a FirstClassCar, false otherwise
 	 */
 	public boolean isFirstClassCar(int carIndex) {
-		return false;
+		return this.car[carIndex] instanceof FirstClassCar;
 	}
 	
 	/**
