@@ -209,40 +209,114 @@ public class FirstClassCarTest {
 		FirstClassCar car = new FirstClassCar(1);
 		
 		//Valid upper boundary row, upper boundary column
-		Seat seat1 = car.seatFor("1-1A");
+		Seat seat1 = car.seatFor("1A");
 		assertEquals(new Seat("1A", 1), seat1);
 		
 		//Valid upper boundary row, middle value column
-		Seat seat2 = car.seatFor("1-1B");
+		Seat seat2 = car.seatFor("1B");
 		assertEquals(new Seat("1B", 1), seat2);
 		
 		//Valid upper boundary row, lower boundary column
-		Seat seat3 = car.seatFor("1-1C");
+		Seat seat3 = car.seatFor("1C");
 		assertEquals(new Seat("1C", 1), seat3);
 		
 		//Valid middle value row, upper boundary column
-		Seat seat4 = car.seatFor("1-10A");
+		Seat seat4 = car.seatFor("10A");
 		assertEquals(new Seat("10A", 1), seat4);
 		
 		//Valid middle value row, middle value column
-		Seat seat5 = car.seatFor("1-10B");
+		Seat seat5 = car.seatFor("10B");
 		assertEquals(new Seat("10B", 1), seat5);
 		
 		//Valid middle value row, lower value column
-		Seat seat6 = car.seatFor("1-10C");
+		Seat seat6 = car.seatFor("10C");
 		assertEquals(new Seat("10C", 1), seat6);
 		
 		//Valid lower boundary row, upper boundary column
-		Seat seat7 = car.seatFor("1-17A");
+		Seat seat7 = car.seatFor("17A");
 		assertEquals(new Seat("17A", 1), seat7);
 		
 		//Valid lower boundary row, middle value column
-		Seat seat8 = car.seatFor("1-17B");
+		Seat seat8 = car.seatFor("17B");
 		assertEquals(new Seat("17B", 1), seat8);
 		
 		//Valid lower boundary row, lower boundary column
-		Seat seat9 = car.seatFor("1-17C");
+		Seat seat9 = car.seatFor("17C");
 		assertEquals(new Seat("17C", 1), seat9);
+		
+		//Test invalid seat labels
+		//Empty label
+		Seat seat10 = null;
+		try {
+			seat10 = car.seatFor("");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat10);
+		}
+		
+		//Label with no letter
+		Seat seat11 = null;
+		try {
+			seat10 = car.seatFor("1");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat11);
+		}
+		
+		//Two digit label with no letter
+		Seat seat12 = null;
+		try {
+			seat12 = car.seatFor("17");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat12);
+		}
+		
+		//Label with no number
+		Seat seat13 = null;
+		try {
+			seat10 = car.seatFor("A");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat13);
+		}
+		
+		//Label with invalid row number, lower bound
+		Seat seat14 = null;
+		try {
+			seat10 = car.seatFor("0A");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat14);
+		}
+		
+		//Label with invalid row number, upper bound
+		Seat seat15 = null;
+		try {
+			seat10 = car.seatFor("18A");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat15);
+		}
+		
+		//Label with invalid letter for first class car
+		Seat seat16 = null;
+		try {
+			seat10 = car.seatFor("10D");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat16);
+		}
+		
+		//Label of the correct length but all letters
+		
+		//Label of the correct length but all numbers
+		
+		//Label of the correct length but letters/numbers out of order
+		
+		//Label of the correct length but contains non-alphanumeric characters
+		
+		
 	}
 
 	/**

@@ -126,113 +126,73 @@ public abstract class TrainCar {
 	 * @return the seat at the given label in the array of seats
 	 * @throws IllegalArgumentException if the label is improper for the car
 	 */
-	protected Seat seatFor(String label, Seat[][] seats) {
-		//Call private helper method to check if label is valid for the train car
-		if (parseLabel(label, seats.length, seats[0].length).length == 0) {
-			throw new IllegalArgumentException("Label is not proper for the car.");
+	protected Seat seatFor(String label, Seat[][] seats) throws IllegalArgumentException {
+		if (this.seatLabelValidator(label, seats.length, seats[0].length)) {
+			int[] idx = this.parseLabel(label);
+			return seats[idx[0]][idx[1]];
+		} else {
+			throw new IllegalArgumentException("Invalid seat label");
 		}
-		//If the label is valid, use the number corresponding to the row and the letter
-		//corresponding to the column to index directly into the Seat array and get the
-		//seat
-		int row = parseLabel(label, seats.length, seats[0].length)[0];
-		int col = parseLabel(label, seats.length, seats[0].length)[1];
-		return seats[row][col];
 	}
 	
 	/**
-	 * Helper method to parse label strings to check if they are valid for the car
-	 * and then return the numerical row,column index corresponding to the label
-	 * @param label the seat label to check
-	 * @param numRows the number of rows in the seating array passed to seatFor()
-	 * @param numCols the number of columns in the seating array passed to seatFor()
-	 * @return an empty array if the label is invalid, or a 1x2 integer array containing the
-	 * numerical row,column index corresponding to the label if the label is valid
+	 * Method used to parse a seat label and return a zero-based row,column index
+	 * @param label
+	 * @return
 	 */
-	private int[] parseLabel(String label, int numRows, int numCols) {
-		//Use an FSM to check that the label contains one or two digits followed by a letter
-		final int state0 = 0;
-		final int state1 = 1;
-		final int state2 = 2;
-		final int state3 = 3;
-		final int errorState = 4;
+	private int[] parseLabel(String label) {
+		int row = 0;
+		int col = 0;
+		int[] idx = new int[2];
+		if (label.length() == 2) {
+			row = Integer.parseInt("" + label.charAt(0)) - 1;
+			col = (int) label.charAt(1) - ASCII_A;
+		} else if (label.length() == 3) {
+			row = Integer.parseInt("" + label.charAt(0) + label.charAt(1)) - 1;
+			col = (int) label.charAt(2) - ASCII_A;
+		}
+		idx[0] = row;
+		idx[1] = col;
+		return idx;
+	}
 		
-		int state = state0;
-		
-		for (int i = 0; i < label.length(); i++) {
-			char ch = label.charAt(i);
-			switch (state) {
-				case state0:
-					if (Character.isDigit(ch) && i != label.length() - 1) {
-						state = state1;
-					} else {
-						state = errorState;
-					}
-					break;
-				case state1:
-					if (Character.isDigit(ch) && i != label.length() - 1) {
-						state = state2;
-					} else if (Character.isLetter(ch)) {
-						state = state3;
-					} else {
-						state = errorState;
-					}
-					break;
-				case state2:
-					if (Character.isLetter(ch) && i == label.length() - 1) {
-						state = state3;
-					} else {
-						state = errorState;
-					}
-					break;
-				case state3:
-					//Do nothing
-					break;
-				case errorState:
-					return new int[0];
-				default:
-					//Do nothing
+	/**
+	 * Used to check labels for valid form. The label must contain a one or two digit integer
+	 * followed directly by a letter. The integer must be between 1 and the number of rows for
+	 * the car. The letter must be between A and C if the car has three seats per row and between
+	 * A and D if the car has four seats per row.
+	 * @param label the label to validate
+	 * @return true if the label is valid
+	 */
+	private boolean seatLabelValidator(String label, int numRow, int numSeatsPerRow) {
+		if (label.length() != 2 && label.length() != 3) {
+			return false;
+		}
+		if (label.length() == 2) {
+			if (!Character.isDigit(label.charAt(0)) || !Character.isLetter(label.charAt(1))) {
+				return false;
+			}
+			if (Integer.parseInt("" + label.charAt(0)) < 1 || Integer.parseInt("" + label.charAt(0)) > numRow) {
+				return false;
+			}
+			if (numSeatsPerRow == 3 && label.charAt(1) != 'A' && label.charAt(1) != 'B' && label.charAt(1) != 'C') {
+				return false;
+			} else if (numSeatsPerRow == 4 && label.charAt(1) != 'A' && label.charAt(1) != 'B' && label.charAt(1) != 'C' && label.charAt(1) != 'D') {
+				return false;
+			}
+		} else if (label.length() == 3) {
+			if (!Character.isDigit(label.charAt(0)) || !Character.isDigit(label.charAt(1)) || !Character.isLetter(label.charAt(2))) {
+				return false;
+			}
+			if (Integer.parseInt("" + label.charAt(0) + label.charAt(1)) < 1 || Integer.parseInt("" + label.charAt(0) + label.charAt(1)) > numRow) {
+				return false;
+			}
+			if (numSeatsPerRow == 3 && label.charAt(2) != 'A' && label.charAt(2) != 'B' && label.charAt(2) != 'C') {
+				return false;
+			} else if (numSeatsPerRow == 4 && label.charAt(2) != 'A' && label.charAt(2) != 'B' && label.charAt(2) != 'C'&& label.charAt(2) != 'D') {
+				return false;
 			}
 		}
-		
-		//Now that the label is guaranteed to consisted of one or two digits followed by a letter, check that they are valid
-		//String representation of row number
-		String numString = "";
-		//Char to store the seat letter
-		char letter = ' ';
-		//Integer to store the integer representation of the row number as an array index
-		int rowNumIndex = 0;
-		//Integer to store the integer representation of the seat letter as an array index
-		int colNumIndex = 0;
-		
-		if (label.length() == 2) {
-			numString = "" + label.charAt(0);
-			letter = label.charAt(1);
-		} else if (label.length() == 3) {
-			numString = "" + label.charAt(0) + label.charAt(1);
-			letter = label.charAt(2);
-		}
-		
-		//Set rowNum and make sure it's valid based on the Seat array's dimensions; 
-		//Remember to subtract off 1 to make it into an array index
-		rowNumIndex = Integer.parseInt(numString) - 1;
-		if (rowNumIndex < 0 || rowNumIndex >= numRows) { //Check that the 
-			return new int[0];
-		}
-		
-		//Check that the letter is valid
-		if (numCols == 3 && letter != 'A' && letter != 'B' && letter != 'C') {
-			return new int[0];
-		} else if (numCols == 4 && letter != 'A' && letter != 'B' && letter != 'C' && letter != 'D') {
-			return new int[0];
-		}
-		
-		//Map the letter to its numerical value
-		//Subtract off 1 to make it an array index
-		colNumIndex = ASCII_A - ((int) (letter)) - 1;
-		
-		int[] out = new int[2];
-		out[0] = rowNumIndex;
-		out[1] = colNumIndex;
-		return out;
+		return true;
 	}
 }
