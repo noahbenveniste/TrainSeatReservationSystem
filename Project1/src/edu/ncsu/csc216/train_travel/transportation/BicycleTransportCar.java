@@ -35,7 +35,6 @@ public class BicycleTransportCar extends TrainCar {
 	 */
 	@Override
 	public int openSeatsLeft() {
-		//TODO implement a proper return
 		return 0;
 	}
 
@@ -66,6 +65,6 @@ public class BicycleTransportCar extends TrainCar {
 	 */
 	@Override
 	public String getSeatMap() {
-		return "Bicycle Transport Car #" + this.getCarIDNumber() + "\n" + "Seats cannot be reserved.";
+		return "\nBicycle Transport Car #" + this.getCarIDNumber() + "\n" + "Seats cannot be reserved.";
 	}
 }

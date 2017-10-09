@@ -106,9 +106,19 @@ public abstract class TrainCar {
 					} else { //If the seat is reserved, put in an 'x'
 						s += "[ x ]";
 					}
-				} else { //If the column iteration is on the aisle, print empty space and then decrement the column counter so a seat isn't skipped
+				} else { //If the column iteration is on the aisle, print empty space and then the seat at the index in the seat array
 					s += "    ";
-					j--;
+					//Check if the seat is reserved or not
+					if (!seats[i][j].isReserved()) {
+						//Label consists of a one digit number and a letter
+						if (seats[i][j].getLabel().length() == 2) {
+							s += "[ " + seats[i][j].getLabel() + "]";
+						} else if (seats[i][j].getLabel().length() == 3) { //Label consists of a two digit number and a letter
+							s += "[" + seats[i][j].getLabel() + "]";
+						}
+					} else { //If the seat is reserved, put in an 'x'
+						s += "[ x ]";
+					}
 				}
 			}
 			//When all seats in the row have been added, go down a line
@@ -168,6 +178,7 @@ public abstract class TrainCar {
 		if (label.length() != 2 && label.length() != 3) {
 			return false;
 		}
+		//For labels consisting of a one digit integer and a letter
 		if (label.length() == 2) {
 			if (!Character.isDigit(label.charAt(0)) || !Character.isLetter(label.charAt(1))) {
 				return false;
@@ -180,6 +191,7 @@ public abstract class TrainCar {
 			} else if (numSeatsPerRow == 4 && label.charAt(1) != 'A' && label.charAt(1) != 'B' && label.charAt(1) != 'C' && label.charAt(1) != 'D') {
 				return false;
 			}
+		//For labels consisting of a two digit integer and a letter
 		} else if (label.length() == 3) {
 			if (!Character.isDigit(label.charAt(0)) || !Character.isDigit(label.charAt(1)) || !Character.isLetter(label.charAt(2))) {
 				return false;

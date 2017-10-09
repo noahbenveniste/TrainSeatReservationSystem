@@ -175,7 +175,7 @@ public class FirstClassCarTest {
 		//Invalid upper boundary row, lower boundary column
 		Seat seat11 = null;
 		try {
-			seat11 = car.seatFor(-1, 4);
+			seat11 = car.seatFor(-1, 3);
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertNull(seat11);
@@ -193,10 +193,46 @@ public class FirstClassCarTest {
 		//Invalid lower boundary row, lower boundary column
 		Seat seat13 = null;
 		try {
-			seat13 = car.seatFor(17, 4);
+			seat13 = car.seatFor(17, 3);
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertNull(seat13);
+		}
+		
+		//Invalid row only, upper boundary
+		Seat seat14 = null;
+		try {
+			seat14 = car.seatFor(-1, 2);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat14);
+		}
+		
+		//Invalid row only, lower bound
+		Seat seat15 = null;
+		try {
+			seat15 = car.seatFor(17, 2);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat15);
+		}
+		
+		//Invalid column only, upper bound
+		Seat seat16 = null;
+		try {
+			seat16 = car.seatFor(16, -1);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat16);
+		}
+		
+		//Invalid column only, lower bound
+		Seat seat17 = null;
+		try {
+			seat17 = car.seatFor(16, 3);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat17);
 		}
 	}
 
@@ -257,7 +293,7 @@ public class FirstClassCarTest {
 		//Label with no letter
 		Seat seat11 = null;
 		try {
-			seat10 = car.seatFor("1");
+			seat11 = car.seatFor("1");
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertNull(seat11);
@@ -275,7 +311,7 @@ public class FirstClassCarTest {
 		//Label with no number
 		Seat seat13 = null;
 		try {
-			seat10 = car.seatFor("A");
+			seat13 = car.seatFor("A");
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertNull(seat13);
@@ -284,7 +320,7 @@ public class FirstClassCarTest {
 		//Label with invalid row number, lower bound
 		Seat seat14 = null;
 		try {
-			seat10 = car.seatFor("0A");
+			seat14 = car.seatFor("0A");
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertNull(seat14);
@@ -293,7 +329,7 @@ public class FirstClassCarTest {
 		//Label with invalid row number, upper bound
 		Seat seat15 = null;
 		try {
-			seat10 = car.seatFor("18A");
+			seat15 = car.seatFor("18A");
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertNull(seat15);
@@ -302,21 +338,87 @@ public class FirstClassCarTest {
 		//Label with invalid letter for first class car
 		Seat seat16 = null;
 		try {
-			seat10 = car.seatFor("10D");
+			seat16 = car.seatFor("10D");
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertNull(seat16);
 		}
 		
+		Seat seat25 = null;
+		try {
+			seat25 = car.seatFor("9D");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat25);
+		}
+		
 		//Label of the correct length but all letters
+		Seat seat17 = null;
+		try {
+			seat17 = car.seatFor("AB");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat17);
+		}
+		
+		Seat seat18 = null;
+		try {
+			seat18 = car.seatFor("ABC");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat18);
+		}
 		
 		//Label of the correct length but all numbers
+		Seat seat19 = null;
+		try {
+			seat19 = car.seatFor("12");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat19);
+		}
+		
+		Seat seat20 = null;
+		try {
+			seat20 = car.seatFor("123");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat20);
+		}
 		
 		//Label of the correct length but letters/numbers out of order
+		Seat seat21 = null;
+		try {
+			seat21 = car.seatFor("A2");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat21);
+		}
+		
+		Seat seat22 = null;
+		try {
+			seat22 = car.seatFor("1A1");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat22);
+		}
+		
+		Seat seat23 = null;
+		try {
+			seat23 = car.seatFor("A11");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat23);
+		}
 		
 		//Label of the correct length but contains non-alphanumeric characters
-		
-		
+		Seat seat24 = null;
+		try {
+			seat24 = car.seatFor("11!");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(seat24);
+		}
 	}
 
 	/**
@@ -324,7 +426,102 @@ public class FirstClassCarTest {
 	 */
 	@Test
 	public void testGetSeatMap() {
-		fail("Not yet implemented");
+		//Initialize object
+		FirstClassCar car = new FirstClassCar(1);
+		String expected1 = "\nFirst Class Car #1"
+						+ "\n"
+						+ "\n"
+						+ "[ 1A]    [ 1B][ 1C]\n"
+						+ "[ 2A]    [ 2B][ 2C]\n"
+						+ "[ 3A]    [ 3B][ 3C]\n"
+						+ "[ 4A]    [ 4B][ 4C]\n"
+						+ "[ 5A]    [ 5B][ 5C]\n"
+						+ "[ 6A]    [ 6B][ 6C]\n"
+						+ "[ 7A]    [ 7B][ 7C]\n"
+						+ "[ 8A]    [ 8B][ 8C]\n"
+						+ "[ 9A]    [ 9B][ 9C]\n"
+						+ "[10A]    [10B][10C]\n"
+						+ "[11A]    [11B][11C]\n"
+						+ "[12A]    [12B][12C]\n"
+						+ "[13A]    [13B][13C]\n"
+						+ "[14A]    [14B][14C]\n"
+						+ "[15A]    [15B][15C]\n"
+						+ "[16A]    [16B][16C]\n"
+						+ "[17A]    [17B][17C]\n";
+		assertEquals(expected1, car.getSeatMap());
+		
+		//Assign seats and check that the map updates properly
+		car.seatFor("17C").reserve();
+		car.seatFor("1A").reserve();
+		car.seatFor("10B").reserve();
+		String expected2 = "\nFirst Class Car #1"
+						+ "\n"
+						+ "\n"
+						+ "[ x ]    [ 1B][ 1C]\n"
+						+ "[ 2A]    [ 2B][ 2C]\n"
+						+ "[ 3A]    [ 3B][ 3C]\n"
+						+ "[ 4A]    [ 4B][ 4C]\n"
+						+ "[ 5A]    [ 5B][ 5C]\n"
+						+ "[ 6A]    [ 6B][ 6C]\n"
+						+ "[ 7A]    [ 7B][ 7C]\n"
+						+ "[ 8A]    [ 8B][ 8C]\n"
+						+ "[ 9A]    [ 9B][ 9C]\n"
+						+ "[10A]    [ x ][10C]\n"
+						+ "[11A]    [11B][11C]\n"
+						+ "[12A]    [12B][12C]\n"
+						+ "[13A]    [13B][13C]\n"
+						+ "[14A]    [14B][14C]\n"
+						+ "[15A]    [15B][15C]\n"
+						+ "[16A]    [16B][16C]\n"
+						+ "[17A]    [17B][ x ]\n";
+		assertEquals(expected2, car.getSeatMap());
+		
+		//Release seats and check that the map updates properly
+		car.seatFor("1A").release();
+		String expected3 = "\nFirst Class Car #1"
+						+ "\n"
+						+ "\n"
+						+ "[ 1A]    [ 1B][ 1C]\n"
+						+ "[ 2A]    [ 2B][ 2C]\n"
+						+ "[ 3A]    [ 3B][ 3C]\n"
+						+ "[ 4A]    [ 4B][ 4C]\n"
+						+ "[ 5A]    [ 5B][ 5C]\n"
+						+ "[ 6A]    [ 6B][ 6C]\n"
+						+ "[ 7A]    [ 7B][ 7C]\n"
+						+ "[ 8A]    [ 8B][ 8C]\n"
+						+ "[ 9A]    [ 9B][ 9C]\n"
+						+ "[10A]    [ x ][10C]\n"
+						+ "[11A]    [11B][11C]\n"
+						+ "[12A]    [12B][12C]\n"
+						+ "[13A]    [13B][13C]\n"
+						+ "[14A]    [14B][14C]\n"
+						+ "[15A]    [15B][15C]\n"
+						+ "[16A]    [16B][16C]\n"
+						+ "[17A]    [17B][ x ]\n";
+		assertEquals(expected3, car.getSeatMap());
+		
+		car.seatFor("17C").release();
+		car.seatFor("10B").release();
+		String expected4 = "\nFirst Class Car #1"
+						+ "\n"
+						+ "\n"
+						+ "[ 1A]    [ 1B][ 1C]\n"
+						+ "[ 2A]    [ 2B][ 2C]\n"
+						+ "[ 3A]    [ 3B][ 3C]\n"
+						+ "[ 4A]    [ 4B][ 4C]\n"
+						+ "[ 5A]    [ 5B][ 5C]\n"
+						+ "[ 6A]    [ 6B][ 6C]\n"
+						+ "[ 7A]    [ 7B][ 7C]\n"
+						+ "[ 8A]    [ 8B][ 8C]\n"
+						+ "[ 9A]    [ 9B][ 9C]\n"
+						+ "[10A]    [10B][10C]\n"
+						+ "[11A]    [11B][11C]\n"
+						+ "[12A]    [12B][12C]\n"
+						+ "[13A]    [13B][13C]\n"
+						+ "[14A]    [14B][14C]\n"
+						+ "[15A]    [15B][15C]\n"
+						+ "[16A]    [16B][16C]\n"
+						+ "[17A]    [17B][17C]\n";
+		assertEquals(expected4, car.getSeatMap());
 	}
-
 }

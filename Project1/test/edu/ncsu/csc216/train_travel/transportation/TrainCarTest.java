@@ -5,7 +5,10 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 /**
- * Unit tests for the TrainCar class
+ * Unit tests for the TrainCar class. Note that because most of the methods in TrainCar
+ * are either abstract or protected, FirstClassCarTest, SecondClassCarTest and BicycleTransportCarTest
+ * extensively test the individual implementations of the abstract methods, as well as the
+ * protected methods that are called by these implementations.
  * @author Noah Benveniste
  */
 public class TrainCarTest {
@@ -39,7 +42,15 @@ public class TrainCarTest {
 	 */
 	@Test
 	public void testDrawSeatChart() {
-		fail();
+		FirstClassCar car = new FirstClassCar(1);
+		//Get the seats from the car
+		Seat[][] seats = new Seat[17][3];
+		for (int i = 0; i < 17; i++) {
+			for (int j = 0; j < 3; j++) {
+				seats[i][j] = car.seatFor(i, j);
+			}
+		}
+		
 	}
 
 	/**

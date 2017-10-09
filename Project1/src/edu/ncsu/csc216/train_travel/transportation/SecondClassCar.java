@@ -84,7 +84,11 @@ public class SecondClassCar extends TrainCar {
 	 */
 	@Override
 	public Seat seatFor(int row, int col) {
-		return this.seats[row][col];
+		if (row < 0 || row >= NUM_ROWS || col < 0 || col >= NUM_SEATS_PER_ROW) {
+			throw new IllegalArgumentException();
+		} else {
+			return this.seats[row][col];
+		}
 	}
 
 	/**
@@ -105,6 +109,6 @@ public class SecondClassCar extends TrainCar {
 	 */
 	@Override
 	public String getSeatMap() {
-		return "Second Class Car #" + this.getCarIDNumber() + "\n" + "\n" + drawSeatChart(this.seats, AISLE_INDEX);
+		return "\nSecond Class Car #" + this.getCarIDNumber() + "\n" + "\n" + drawSeatChart(this.seats, AISLE_INDEX);
 	}
 }

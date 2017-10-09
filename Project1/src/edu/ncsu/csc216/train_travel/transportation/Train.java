@@ -230,6 +230,6 @@ public class Train {
 	 * @return the seat map for the car as a single string
 	 */
 	public String getCarSeatMap(int carIndex) {
-		return null;
+		return this.car[carIndex].getSeatMap();
 	}
 }
