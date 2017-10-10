@@ -22,7 +22,7 @@ public class TrainCarTest {
 	}
 
 	/**
-	 * Test method for {@link edu.ncsu.csc216.train_travel.transportation.TrainCar#getCarIDNumber()}.
+	 * Test method for getCarIDNumber()
 	 */
 	@Test
 	public void testGetCarIDNumber() {
@@ -30,7 +30,7 @@ public class TrainCarTest {
 	}
 
 	/**
-	 * Test method for {@link edu.ncsu.csc216.train_travel.transportation.TrainCar#initSeats(edu.ncsu.csc216.train_travel.transportation.Seat[][])}.
+	 * Test method for initSeats()
 	 */
 	@Test
 	public void testInitSeats() {
@@ -38,7 +38,7 @@ public class TrainCarTest {
 	}
 
 	/**
-	 * Test method for {@link edu.ncsu.csc216.train_travel.transportation.TrainCar#drawSeatChart(edu.ncsu.csc216.train_travel.transportation.Seat[][], int)}.
+	 * Test method for drawSeatChart()
 	 */
 	@Test
 	public void testDrawSeatChart() {
@@ -54,7 +54,7 @@ public class TrainCarTest {
 	}
 
 	/**
-	 * Test method for {@link edu.ncsu.csc216.train_travel.transportation.TrainCar#seatFor(java.lang.String, edu.ncsu.csc216.train_travel.transportation.Seat[][])}.
+	 * Test method for seatFor()
 	 */
 	@Test
 	public void testSeatForStringSeatArrayArray() {

@@ -113,14 +113,14 @@ public class Train {
 	
 	/**
 	 * Gets the seat at the specified zero-based row,column index in the specified car
-	 * @param carNum the number of the car to get the seat from
+	 * @param carNum the index of the car to get the seat from
 	 * @param row the zero-based row index of the seat
 	 * @param col the zero-based column index of the seat
 	 * @return the seat located at row,col in the specified car
 	 * @throws IllegalArgumentException if row,col is out of bounds or carNum is out of bounds
 	 */
 	public Seat getSeatFor(int carNum, int row, int col) throws IllegalArgumentException {
-		if (carNum < 0 || carNum > car.length) { //Check that the carNum index is in range
+		if (carNum < 0 || carNum >= car.length) { //Check that the carNum index is in range
 			throw new IllegalArgumentException();
 		}
 		return this.car[carNum].seatFor(row, col); //Throws IAE if row,col out of bounds for the seating array
@@ -128,14 +128,14 @@ public class Train {
 	
 	/**
 	 * Gets the seat specified by a label in the specified car
-	 * @param carNum the number of the car to get the seat from
+	 * @param carNum the index of the car to get the seat from
 	 * @param label the seat's label in the form <row number><letter>
 	 * @return the seat specified by the label in the specified car
 	 * @throws IllegalArgumentException if the seat label is invalid for the specified car or
 	 * if carNum is out of bounds
 	 */
 	public Seat getSeatFor(int carNum, String label) throws IllegalArgumentException {
-		if (carNum < 0 || carNum > car.length) { //Check that the carNum index is in range
+		if (carNum < 0 || carNum >= car.length) { //Check that the carNum index is in range
 			throw new IllegalArgumentException();
 		}
 		return this.car[carNum].seatFor(label); //Throws IAE if label is improper for the car or invalid form
@@ -177,8 +177,8 @@ public class Train {
 	 */
 	public int openSecondClassSeats() {
 		int openSeatCount = 0;
-		//Loop through the first class cars
-		for (int i = 0; i < this.numFirstClassCars; i++) {
+		//Loop through the second class cars
+		for (int i = this.numFirstClassCars; i < this.numCars() - 1; i++) {
 			openSeatCount += this.car[i].openSeatsLeft();
 		}
 		return openSeatCount;
@@ -190,8 +190,8 @@ public class Train {
 	 */
 	public int openFirstClassSeats() {
 		int openSeatCount = 0;
-		//Loop through the second class cars
-		for (int i = this.numFirstClassCars; i < this.numCars() - 1; i++) {
+		//Loop through the first class cars
+		for (int i = 0; i < this.numFirstClassCars; i++) {
 			openSeatCount += this.car[i].openSeatsLeft();
 		}
 		return openSeatCount;
