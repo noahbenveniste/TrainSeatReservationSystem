@@ -65,7 +65,12 @@ public class ComfortClass extends Reservation {
 	 */
 	@Override
 	public void changeSeats(String seatString) throws IllegalArgumentException {
-		// TODO Auto-generated method stub
+		//Parse the seat string to get an array of seat objects
+		Seat[] newSeats = this.parseSeats(seatString);
+		//Pass the array of new seats to reserve along with the old seats to reassignSeats()
+		newSeats = this.reassignSeats(this.theSeats, newSeats);
+		//Set theSeats to the newly reserved seats
+		this.theSeats = newSeats;
 	}
 
 	/**
