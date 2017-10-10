@@ -1,5 +1,6 @@
 package edu.ncsu.csc216.train_travel.tickets;
 
+import edu.ncsu.csc216.train_travel.transportation.Seat;
 import edu.ncsu.csc216.train_travel.transportation.Train;
 
 /**
@@ -8,6 +9,8 @@ import edu.ncsu.csc216.train_travel.transportation.Train;
  * @author Noah Benveniste
  */
 public class ComfortClass extends Reservation {
+	/** Array of seats for reserved seating assignments */
+	private Seat[] theSeats;
 
 	/**
 	 * Constructs a new ComfortClass Reservation
@@ -16,7 +19,6 @@ public class ComfortClass extends Reservation {
 	 */
 	private ComfortClass(int numPassengers, Train myTrain) {
 		super(numPassengers, myTrain);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
@@ -26,7 +28,7 @@ public class ComfortClass extends Reservation {
 	 * @return the newly created Reservation
 	 */
 	public static ComfortClass newReservation(int numPassengers, Train myTrain) {
-		return null;
+		return new ComfortClass(numPassengers, myTrain);
 	}
 
 	/**
@@ -44,7 +46,7 @@ public class ComfortClass extends Reservation {
 	 * @throws IllegalArgumentException if seatString represents invalid Seats for this Reservation
 	 */
 	@Override
-	public void changeSeats(String seatString) {
+	public void changeSeats(String seatString) throws IllegalArgumentException {
 		// TODO Auto-generated method stub
 	}
 
@@ -54,7 +56,10 @@ public class ComfortClass extends Reservation {
 	 */
 	@Override
 	public void cancel() {
-		// TODO Auto-generated method stub
+		//Release reserved seats
+		//Decrement the number of comfort class passengers on the train
+		int n = -1*this.getNumPassengers();
+		myTrain.incComfortClassPassengers(n);
 	}
 
 	/**
@@ -63,8 +68,7 @@ public class ComfortClass extends Reservation {
 	 */
 	@Override
 	public String toPrint() {
-		// TODO Auto-generated method stub
-		return null;
+		return Seat.printListOfSeats(theSeats);
 	}
 
 }

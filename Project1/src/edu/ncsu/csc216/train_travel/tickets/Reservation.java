@@ -1,5 +1,8 @@
 package edu.ncsu.csc216.train_travel.tickets;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import edu.ncsu.csc216.train_travel.transportation.Seat;
 import edu.ncsu.csc216.train_travel.transportation.Train;
 
@@ -94,7 +97,29 @@ public abstract class Reservation {
 	 * @return an array of Seats corresponding to the input string
 	 */
 	protected Seat[] parseSeats(String seatString) {
-		return null;
+		//Construct a scanner for the input string, tokenizing on commas
+		Scanner lineReader = new Scanner(seatString);
+		lineReader.useDelimiter(",");
+		
+		ArrayList<Seat> tempArray = new ArrayList<Seat>();
+		
+		while(lineReader.hasNext()) {
+			String current = lineReader.next();
+			int carNum = Integer.parseInt("" + current.charAt(0));
+			//Get the seat label; start at the second index, skipping the car number and the dash
+			String label = "";
+			for (int i = 2; i < current.length(); i++) {
+				label += current.charAt(i);
+			}
+			tempArray.add(new Seat(label, carNum));
+		}
+		lineReader.close();
+		
+		Seat[] outArray = new Seat[tempArray.size()];
+		for (int i = 0; i < tempArray.size(); i++) {
+			outArray[i] = tempArray.get(i);
+		}
+		return outArray;
 	}
 	
 	/**
@@ -105,6 +130,14 @@ public abstract class Reservation {
 	 * @throws IllegalArgumentException if the seats to reserve are invalid
 	 */
 	protected Seat[] reassignSeats(Seat[] seatsToReserve, Seat[] currentSeatArray) {
-		return null;
+		//Loop through the current seating array, releasing all reserved seats
+		for (int i = 0; i < currentSeatArray.length; i++) {
+			currentSeatArray[i].release();
+		}
+		//Loop through the seats to reserve array, reserving all seats and then returning the array
+		for (int i = 0; i < seatsToReserve.length; i++) {
+			seatsToReserve[i].reserve();
+		}
+		return seatsToReserve;
 	}
 }

@@ -16,7 +16,6 @@ public class BicycleClass extends Reservation {
 	 */
 	private BicycleClass(int numPassengers, Train myTrain) {
 		super(numPassengers, myTrain);
-		// TODO Auto-generated constructor stub
 	}
 	
 	/**
@@ -26,7 +25,7 @@ public class BicycleClass extends Reservation {
 	 * @return the newly created Reservation
 	 */
 	public static BicycleClass newReservation(int numPassengers, Train myTrain) {
-		return null;
+		return new BicycleClass(numPassengers, myTrain);
 	}
 
 	/**
@@ -34,7 +33,7 @@ public class BicycleClass extends Reservation {
 	 * @throws IllegalArgumentException if called on a BicycleClass Reservation
 	 */
 	@Override
-	public void chooseSeats() {
+	public void chooseSeats() throws IllegalArgumentException {
 		throw new IllegalArgumentException();
 	}
 
@@ -43,7 +42,7 @@ public class BicycleClass extends Reservation {
 	 * @throws IllegalArgumentException if called on a BicycleClass Reservation
 	 */
 	@Override
-	public void changeSeats(String s) {
+	public void changeSeats(String s) throws IllegalArgumentException {
 		throw new IllegalArgumentException();
 	}
 
@@ -52,8 +51,8 @@ public class BicycleClass extends Reservation {
 	 */
 	@Override
 	public void cancel() {
-		// TODO Auto-generated method stub
-		
+		int n = -1*this.getNumPassengers();
+		myTrain.incBicyclePassengers(n);
 	}
 
 	/**
@@ -62,8 +61,7 @@ public class BicycleClass extends Reservation {
 	 */
 	@Override
 	public String toPrint() {
-		// TODO Auto-generated method stub
-		return null;
+		return "(" + this.getNumPassengers() + ")";
 	}
 
 }
