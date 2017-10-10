@@ -23,6 +23,8 @@ public class BicycleClass extends Reservation {
 	 * @param numPassengers the number of passengers the Reservation is for
 	 * @param myTrain the Train that the Reservation is for
 	 * @return the newly created Reservation
+	 * @throws IllegalArgumentException if the number of passengers is invalid or if myTrain
+	 * cannot accommodate them
 	 */
 	public static BicycleClass newReservation(int numPassengers, Train myTrain) {
 		return new BicycleClass(numPassengers, myTrain);

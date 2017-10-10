@@ -29,6 +29,8 @@ public class EconomyClass extends Reservation {
 	 * @param numPassengers the number of passengers the Reservation is for
 	 * @param myTrain the Train that the Reservation is for
 	 * @return the newly created Reservation
+	 * @throws IllegalArgumentException if the number of passengers is invalid or if myTrain
+	 * cannot accommodate them
 	 */
 	public static EconomyClass newReservation(int numPassengers, Train myTrain) {
 		return new EconomyClass(numPassengers, myTrain);
@@ -40,7 +42,7 @@ public class EconomyClass extends Reservation {
 	 */
 	@Override
 	public void chooseSeats() {
-		// TODO Auto-generated method stub
+		//First, check that there is enough unreserved seats in all SecondClassCars in myTrain. Throw an IAE if not.
 	}
 
 	/**
