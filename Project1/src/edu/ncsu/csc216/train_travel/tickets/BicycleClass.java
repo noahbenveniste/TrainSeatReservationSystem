@@ -27,6 +27,9 @@ public class BicycleClass extends Reservation {
 	 * cannot accommodate them
 	 */
 	public static BicycleClass newReservation(int numPassengers, Train myTrain) {
+		if (!Reservation.numPassengersInRange(numPassengers) || !myTrain.hasBicycleCarRoomFor(numPassengers)) {
+			throw new IllegalArgumentException();
+		}
 		return new BicycleClass(numPassengers, myTrain);
 	}
 

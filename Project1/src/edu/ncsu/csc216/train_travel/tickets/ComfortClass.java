@@ -30,6 +30,9 @@ public class ComfortClass extends Reservation {
 	 * cannot accommodate them
 	 */
 	public static ComfortClass newReservation(int numPassengers, Train myTrain) {
+		if (!Reservation.numPassengersInRange(numPassengers) || !myTrain.hasComfortClassRoomFor(numPassengers)) {
+			throw new IllegalArgumentException();
+		}
 		return new ComfortClass(numPassengers, myTrain);
 	}
 

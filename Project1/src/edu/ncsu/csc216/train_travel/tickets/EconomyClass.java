@@ -33,6 +33,9 @@ public class EconomyClass extends Reservation {
 	 * cannot accommodate them
 	 */
 	public static EconomyClass newReservation(int numPassengers, Train myTrain) {
+		if (!Reservation.numPassengersInRange(numPassengers) || !myTrain.hasEconomyClassRoomFor(numPassengers)) {
+			throw new IllegalArgumentException();
+		}
 		return new EconomyClass(numPassengers, myTrain);
 	}
 
@@ -43,6 +46,9 @@ public class EconomyClass extends Reservation {
 	@Override
 	public void chooseSeats() {
 		//First, check that there is enough unreserved seats in all SecondClassCars in myTrain. Throw an IAE if not.
+		
+		//Start in seat 19A in the last SecondClassCar, indexing right across the row until all seats are assigned. Proceed up through
+		//all rows in the car until all seats are found, or into the next car if the previous one is full
 	}
 
 	/**
