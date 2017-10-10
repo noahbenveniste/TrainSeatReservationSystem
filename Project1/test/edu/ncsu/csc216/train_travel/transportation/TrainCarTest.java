@@ -18,7 +18,7 @@ public class TrainCarTest {
 	 */
 	@Test
 	public void testTrainCar() {
-		
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -50,7 +50,7 @@ public class TrainCarTest {
 				seats[i][j] = car.seatFor(i, j);
 			}
 		}
-		
+		fail("Not yet implemented");
 	}
 
 	/**
@@ -60,5 +60,4 @@ public class TrainCarTest {
 	public void testSeatForStringSeatArrayArray() {
 		fail("Not yet implemented");
 	}
-
 }
