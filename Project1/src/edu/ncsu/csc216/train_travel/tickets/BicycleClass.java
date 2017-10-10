@@ -16,6 +16,7 @@ public class BicycleClass extends Reservation {
 	 */
 	private BicycleClass(int numPassengers, Train myTrain) {
 		super(numPassengers, myTrain);
+		myTrain.incBicyclePassengers(numPassengers);
 	}
 	
 	/**

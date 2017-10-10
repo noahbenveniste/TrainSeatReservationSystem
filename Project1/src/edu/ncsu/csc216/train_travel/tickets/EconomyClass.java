@@ -22,6 +22,7 @@ public class EconomyClass extends Reservation {
 	 */
 	private EconomyClass(int numPassengers, Train train) {
 		super(numPassengers, train);
+		train.incEconomyClassPassengers(numPassengers);
 	}
 	
 	/**
