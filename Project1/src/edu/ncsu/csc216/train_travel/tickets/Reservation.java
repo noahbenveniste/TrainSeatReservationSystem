@@ -105,12 +105,20 @@ public abstract class Reservation {
 		
 		while(lineReader.hasNext()) {
 			String current = lineReader.next();
-			int carNum = Integer.parseInt("" + current.charAt(0));
+			
+			//Get the carNum
+			String carNumString = "";
+			for (int i = 0; i < current.indexOf("-"); i++) {
+				carNumString += current.charAt(i);
+			}
+			int carNum = Integer.parseInt(carNumString);
+			
 			//Get the seat label; start at the second index, skipping the car number and the dash
 			String label = "";
-			for (int i = 2; i < current.length(); i++) {
+			for (int i = (current.indexOf('-') + 1); i < current.length(); i++) {
 				label += current.charAt(i);
 			}
+			
 			tempArray.add(new Seat(label, carNum));
 		}
 		lineReader.close();
@@ -130,12 +138,15 @@ public abstract class Reservation {
 	 * @throws IllegalArgumentException if the seats to reserve are invalid
 	 */
 	protected Seat[] reassignSeats(Seat[] seatsToReserve, Seat[] currentSeatArray) {
+		//Check that the new seats are valid
+		
 		//Loop through the current seating array, releasing all reserved seats
 		for (int i = 0; i < currentSeatArray.length; i++) {
 			currentSeatArray[i].release();
 		}
 		//Loop through the seats to reserve array, reserving all seats and then returning the array
 		for (int i = 0; i < seatsToReserve.length; i++) {
+			//Check that the currently indexed seat is not 
 			seatsToReserve[i].reserve();
 		}
 		return seatsToReserve;
