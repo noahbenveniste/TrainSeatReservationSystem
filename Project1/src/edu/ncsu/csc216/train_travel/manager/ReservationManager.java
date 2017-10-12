@@ -36,6 +36,7 @@ public class ReservationManager implements TicketMaster {
 			throw new IllegalArgumentException(e.getMessage());
 		}
 		this.theReservations = new ArrayList<Reservation>();
+		this.reservationTypes = new ArrayList<String>();
 	}
 	
 	/**
@@ -93,16 +94,26 @@ public class ReservationManager implements TicketMaster {
 		} else {
 			throw new IllegalArgumentException("Invalid reservation type");
 		}
+		/*
 		if (this.theReservations.size() == 0) {
 			this.theReservations.add(r);
+			this.reservationTypes.add(type);
 		} else {
 			for (int i = 0; i < theReservations.size(); i++) {
 				if (this.theReservations.get(i).getID() > r.getID()) {
 					this.theReservations.add(i, r);
 					this.reservationTypes.add(i, type);
+					break;
+				} else {
+					this.theReservations.add(i + 1, r);
+					this.reservationTypes.add(i + 1, type);
+					break;
 				}
 			}
 		}
+		*/
+		this.theReservations.add(this.theReservations.size(), r);
+		this.reservationTypes.add(this.reservationTypes.size(), type);
 		return r;
 	}
 	
@@ -118,6 +129,7 @@ public class ReservationManager implements TicketMaster {
 				this.theReservations.get(i).cancel();
 				this.theReservations.remove(i);
 				this.reservationTypes.remove(i);
+				return;
 			}
 		}
 		throw new IllegalArgumentException("No reservation with the specified ID exists");
@@ -145,15 +157,9 @@ public class ReservationManager implements TicketMaster {
 	 */
 	public String printReservationList() {
 		String out = "";
-		for (int i = 1; i < theReservations.size(); i++) {
+		for (int i = 0; i < theReservations.size(); i++) {
 			out += theReservations.get(i).getID() + " " + reservationTypes.get(i) + " " + theReservations.get(i).toPrint() + "\n";
 		}
 		return out;
-	}
-	
-	public static void main(String[] args) {
-		ReservationManager m = new ReservationManager(4);
-		m.makeNewReservation(1, "Comfort");
-		System.out.print(m.printReservationList());
 	}
 }
