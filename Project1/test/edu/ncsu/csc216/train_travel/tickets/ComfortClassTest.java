@@ -119,14 +119,12 @@ public class ComfortClassTest {
 		
 		ComfortClass c1 = ComfortClass.newReservation(1, t);
 		assertEquals(1000, c1.getID());
-		c1.chooseSeats();
 		assertEquals(50, t.openFirstClassSeats());
 		c1.cancel();
 		assertEquals(51, t.openFirstClassSeats());
 		
 		ComfortClass c2 = ComfortClass.newReservation(6, t);
 		assertEquals(1001, c2.getID());
-		c2.chooseSeats();
 		assertEquals(45, t.openFirstClassSeats());
 		c2.cancel();
 		assertEquals(51, t.openFirstClassSeats());
@@ -140,17 +138,14 @@ public class ComfortClassTest {
 		Train t = new Train(7); //Has two FirstClassCars
 		ComfortClass c1 = ComfortClass.newReservation(1, t);
 		assertEquals(1000, c1.getID());
-		c1.chooseSeats();
 		assertEquals("1000 Comfort Class [1-1A]", c1.toPrint());
 		
 		ComfortClass c2 = ComfortClass.newReservation(2, t);
 		assertEquals(1001, c2.getID());
-		c2.chooseSeats();
 		assertEquals("1001 Comfort Class [1-1B,1-1C]", c2.toPrint());
 		
 		ComfortClass c3 = ComfortClass.newReservation(6, t);
 		assertEquals(1002, c3.getID());
-		c3.chooseSeats();
 		assertEquals("1002 Comfort Class [2-16A,2-16B,2-16C,2-17A,2-17B,2-17C]", c3.toPrint());
 		
 		assertTrue(t.hasComfortClassRoomFor(93));
@@ -158,12 +153,10 @@ public class ComfortClassTest {
 		
 		ComfortClass c4 = ComfortClass.newReservation(1, t);
 		assertEquals(1003, c4.getID());
-		c4.chooseSeats();
 		assertEquals("1003 Comfort Class [1-2A]", c4.toPrint());
 		
 		ComfortClass c5 = ComfortClass.newReservation(2, t);
 		assertEquals(1004, c5.getID());
-		c5.chooseSeats();
 		assertEquals("1004 Comfort Class [1-2B,1-2C]", c5.toPrint());
 		
 		//Reserve all A seats in first FirstClassCar, first A seat in the next car should be reserved.
@@ -185,7 +178,6 @@ public class ComfortClassTest {
 		
 		ComfortClass c6 = ComfortClass.newReservation(1, t);
 		assertEquals(1005, c6.getID());
-		c6.chooseSeats();
 		assertEquals("1005 Comfort Class [2-1A]", c6.toPrint());
 		
 		//Reserve all A seats in both FCCs, default seating method should execute.
@@ -209,7 +201,6 @@ public class ComfortClassTest {
 		
 		ComfortClass c7 = ComfortClass.newReservation(1, t);
 		assertEquals(1006, c7.getID());
-		c7.chooseSeats();
 		assertEquals("1006 Comfort Class [2-15B]", c7.toPrint());
 		
 		//Assign seats so that no B/C row has two free seats in the first FCC
@@ -234,11 +225,9 @@ public class ComfortClassTest {
 		//System.out.print(t.getCarSeatMap(0) + "\n\n" + t.getCarSeatMap(1));
 		
 		ComfortClass c8 = ComfortClass.newReservation(2, t);
-		c8.chooseSeats();
 		assertEquals("1007 Comfort Class [2-1B,2-1C]", c8.toPrint());
 		
 		ComfortClass c9 = ComfortClass.newReservation(2, t);
-		c9.chooseSeats();
 		assertEquals("1008 Comfort Class [2-2B,2-2C]", c9.toPrint());
 		
 		//System.out.print(t.getCarSeatMap(0) + "\n\n" + t.getCarSeatMap(1));
@@ -260,65 +249,61 @@ public class ComfortClassTest {
 		t.getSeatFor(1, 14, 2).reserve();
 		
 		ComfortClass c10 = ComfortClass.newReservation(2, t);
-		c10.chooseSeats();
 		assertEquals("1009 Comfort Class [2-13B,2-14C]", c10.toPrint());
 		
 		
 		//Reserve more seats
 		ComfortClass c11 = ComfortClass.newReservation(6, t);
-		c11.chooseSeats();
 		c11.toPrint();
 		assertEquals("1010 Comfort Class [2-6C,2-7C,2-8B,2-9C,2-10C,2-11B]", c11.toPrint());
 		assertEquals(16, t.openFirstClassSeats());
 		
 		ComfortClass c12 = ComfortClass.newReservation(4, t);
-		c12.chooseSeats();
 		assertEquals("1011 Comfort Class [1-16C,2-3C,2-4B,2-5C]", c12.toPrint());
 		assertEquals(12, t.openFirstClassSeats());
 		
 		ComfortClass c13 = ComfortClass.newReservation(6, t);
-		c13.chooseSeats();
 		assertEquals("1012 Comfort Class [1-9C,1-10C,1-11B,1-13B,1-14C,1-15B]", c13.toPrint());
 		assertEquals(6, t.openFirstClassSeats());
 		
 		ComfortClass c14 = ComfortClass.newReservation(1, t);
-		c14.chooseSeats();
 		assertEquals("1013 Comfort Class [1-8B]", c14.toPrint());
 		assertEquals(5, t.openFirstClassSeats());
 		
 		//Attempt to add 6 passengers when there are only 5 seats left
+		ComfortClass c15 = null;
 		try {
-			ComfortClass c15 = ComfortClass.newReservation(6, t);
-			c15.chooseSeats();
+			c15 = ComfortClass.newReservation(6, t);
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertEquals("Not enough open seats", e.getMessage());
+			assertNull(c15);
 		}
 		
 		//Add 3 more passengers
-		ComfortClass c16 = ComfortClass.newReservation(3, t);
-		c16.chooseSeats();
+		ComfortClass.newReservation(3, t);
 		
 		//Attempt to add 3 passengers when there are only 2 seats left
+		ComfortClass c17 = null;
 		try {
-			ComfortClass c17 = ComfortClass.newReservation(3, t);
-			c17.chooseSeats();
+			 c17 = ComfortClass.newReservation(3, t);
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertEquals("Not enough open seats", e.getMessage());
+			assertNull(c17);
 		}
 		
 		//Add 2 more passengers
-		ComfortClass c18 = ComfortClass.newReservation(2, t);
-		c18.chooseSeats();
+		ComfortClass.newReservation(2, t);
 		
 		//Attempt to add 1 more passenger when there are no seats left
+		ComfortClass c19 = null;
 		try {
-			ComfortClass c19 = ComfortClass.newReservation(1, t);
-			c19.chooseSeats();
+			c19 = ComfortClass.newReservation(1, t);
 			fail();
 		} catch (IllegalArgumentException e) {
 			assertEquals("Not enough open seats", e.getMessage());
+			assertNull(c19);
 		}
 	}
 
@@ -482,11 +467,9 @@ public class ComfortClassTest {
 		ComfortClass c = null;
 		
 		c = ComfortClass.newReservation(1, t);
-		c.chooseSeats();
 		assertEquals("1000 Comfort Class [1-1A]", c.toPrint());
 		
 		c = ComfortClass.newReservation(4, t);
-		c.chooseSeats();
 		assertEquals("1001 Comfort Class [1-16A,1-17A,1-17B,1-17C]", c.toPrint());
 	}
 }

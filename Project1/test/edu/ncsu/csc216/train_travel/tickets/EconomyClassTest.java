@@ -120,7 +120,6 @@ public class EconomyClassTest {
 		
 		EconomyClass c1 = EconomyClass.newReservation(1, t);
 		assertEquals(1000, c1.getID());
-		c1.chooseSeats();
 		assertEquals(151, t.openSecondClassSeats());
 		assertTrue(t.hasEconomyClassRoomFor(185));
 		assertFalse(t.hasEconomyClassRoomFor(186));
@@ -131,7 +130,6 @@ public class EconomyClassTest {
 		
 		EconomyClass c2 = EconomyClass.newReservation(6, t);
 		assertEquals(1001, c2.getID());
-		c2.chooseSeats();
 		assertEquals(146, t.openSecondClassSeats());
 		assertTrue(t.hasEconomyClassRoomFor(180));
 		assertFalse(t.hasEconomyClassRoomFor(181));
@@ -149,13 +147,11 @@ public class EconomyClassTest {
 		Train t = new Train(4); //Has two second class cars
 		EconomyClass c = EconomyClass.newReservation(1, t);
 		assertEquals(1000, c.getID());
-		c.chooseSeats();
 		assertEquals("1000 Economy Class [3-19A]", c.toPrint());
 		assertEquals(151, t.openSecondClassSeats());
 		
 		EconomyClass c1 = EconomyClass.newReservation(6, t);
 		assertEquals(1001, c1.getID());
-		c1.chooseSeats();
 		assertEquals("1001 Economy Class [3-18A,3-18B,3-18C,3-19B,3-19C,3-19D]", c1.toPrint());
 	}
 
@@ -166,7 +162,6 @@ public class EconomyClassTest {
 	public void testChangeSeats() {
 		Train t = new Train(4);
 		EconomyClass c = EconomyClass.newReservation(1, t);
-		c.chooseSeats();
 		String invalid;
 		
 		invalid = "";
@@ -251,7 +246,6 @@ public class EconomyClassTest {
 		
 		Train t1 = new Train(7);
 		EconomyClass c1 = EconomyClass.newReservation(2, t1);
-		c1.chooseSeats();
 		
 		invalid = "1-2A,3-2A";
 		try {
@@ -310,11 +304,9 @@ public class EconomyClassTest {
 		EconomyClass c = null;
 		
 		c = EconomyClass.newReservation(1, t);
-		c.chooseSeats();
 		assertEquals("1000 Economy Class [3-19A]", c.toPrint());
 		
 		c = EconomyClass.newReservation(4, t);
-		c.chooseSeats();
 		assertEquals("1001 Economy Class [3-18A,3-19B,3-19C,3-19D]", c.toPrint());
 	}
 }
