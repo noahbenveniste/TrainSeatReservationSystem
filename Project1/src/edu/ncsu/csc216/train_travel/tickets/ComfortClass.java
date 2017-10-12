@@ -228,6 +228,7 @@ public class ComfortClass extends Reservation {
 	 */
 	@Override
 	public String toPrint() {
+		//Sort array first, send to print list of seats
 		return "" + this.getID() + " Comfort Class " + Seat.printListOfSeats(this.theSeats);
 	}
 }

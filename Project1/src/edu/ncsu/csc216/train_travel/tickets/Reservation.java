@@ -156,8 +156,16 @@ public abstract class Reservation {
 		}
 		//Check that all of the seats are unreserved
 		for (int i = 0; i < seatsToReserve.length; i++) {
-			if (seatsToReserve[i].isReserved()) {
-				throw new IllegalArgumentException("One or more of the seats entered are already reserved");
+			if (seatsToReserve[i].isReserved()) { //Check that the seat is not reserved
+				//If it is reserved, first check that it is not already a part of this reservation
+				boolean seatMatch = false;
+				for (int j = 0; j < currentSeatArray.length; j++) {
+					seatMatch = (seatsToReserve[i].equals(currentSeatArray[j])); //If a seat matches, flag it
+				}
+				//If no matching seats were found, throw the IAE
+				if (!seatMatch) {
+					throw new IllegalArgumentException("One or more of the seats entered are already reserved");
+				}
 			}
 		}
 		//Loop through the current seating array, releasing all reserved seats
