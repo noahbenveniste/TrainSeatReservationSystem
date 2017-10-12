@@ -47,6 +47,7 @@ public class EconomyClass extends Reservation {
 	 */
 	@Override
 	public void chooseSeats() {
+		this.reservedSeats = true;
 		//First, check that there is enough unreserved seats in all SecondClassCars in myTrain. Throw an IAE if not.
 		if (myTrain.openSecondClassSeats() < this.getNumPassengers()) {
 			throw new IllegalArgumentException("Not enough open seats");
