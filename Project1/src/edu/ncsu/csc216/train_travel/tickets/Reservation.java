@@ -166,7 +166,7 @@ public abstract class Reservation {
 		}
 		//Loop through the seats to reserve array, reserving all seats and then returning the array
 		for (int i = 0; i < seatsToReserve.length; i++) {
-			
+			seatsToReserve[i].reserve();
 		}
 		return seatsToReserve;
 	}
