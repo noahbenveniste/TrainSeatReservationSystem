@@ -103,7 +103,7 @@ public class ReservationManager implements TicketMaster {
 				}
 			}
 		}
-		return null;
+		return r;
 	}
 	
 	/**
@@ -115,13 +115,9 @@ public class ReservationManager implements TicketMaster {
 				reservationIDString.charAt(2) + reservationIDString.charAt(3));
 		for (int i = 0; i < this.theReservations.size(); i++) {
 			if (this.theReservations.get(i).getID() == reservationID) {
-				try {
-					this.theReservations.get(i).cancel();
-					this.theReservations.remove(i);
-					this.reservationTypes.remove(i);
-				} catch (IllegalArgumentException e) {
-					throw new IllegalArgumentException(e.getMessage());
-				}
+				this.theReservations.get(i).cancel();
+				this.theReservations.remove(i);
+				this.reservationTypes.remove(i);
 			}
 		}
 		throw new IllegalArgumentException("No reservation with the specified ID exists");
@@ -153,5 +149,11 @@ public class ReservationManager implements TicketMaster {
 			out += theReservations.get(i).getID() + " " + reservationTypes.get(i) + " " + theReservations.get(i).toPrint() + "\n";
 		}
 		return out;
+	}
+	
+	public static void main(String[] args) {
+		ReservationManager m = new ReservationManager(4);
+		m.makeNewReservation(1, "Comfort");
+		System.out.print(m.printReservationList());
 	}
 }
