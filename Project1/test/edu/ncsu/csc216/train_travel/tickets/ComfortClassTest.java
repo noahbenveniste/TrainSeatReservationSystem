@@ -151,7 +151,7 @@ public class ComfortClassTest {
 		ComfortClass c3 = ComfortClass.newReservation(6, t);
 		assertEquals(1002, c3.getID());
 		c3.chooseSeats();
-		assertEquals("[2-17A,2-17B,2-17C,2-16A,2-16B,2-16C]", c3.toPrint());
+		assertEquals("[2-16A,2-16B,2-16C,2-17A,2-17B,2-17C]", c3.toPrint());
 		
 		assertTrue(t.hasComfortClassRoomFor(93));
 		assertFalse(t.hasComfortClassRoomFor(94));
@@ -261,23 +261,24 @@ public class ComfortClassTest {
 		
 		ComfortClass c10 = ComfortClass.newReservation(2, t);
 		c10.chooseSeats();
-		assertEquals("[2-14C,2-13B]", c10.toPrint());
+		assertEquals("[2-13B,2-14C]", c10.toPrint());
 		
 		
 		//Reserve more seats
 		ComfortClass c11 = ComfortClass.newReservation(6, t);
 		c11.chooseSeats();
-		assertEquals("[2-11B,2-10C,2-9C,2-8B,2-7C,2-6C]", c11.toPrint());
+		c11.toPrint();
+		assertEquals("[2-6C,2-7C,2-8B,2-9C,2-10C,2-11B]", c11.toPrint());
 		assertEquals(16, t.openFirstClassSeats());
 		
 		ComfortClass c12 = ComfortClass.newReservation(4, t);
 		c12.chooseSeats();
-		assertEquals("[2-5C,2-4B,2-3C,1-16C]", c12.toPrint());
+		assertEquals("[1-16C,2-3C,2-4B,2-5C]", c12.toPrint());
 		assertEquals(12, t.openFirstClassSeats());
 		
 		ComfortClass c13 = ComfortClass.newReservation(6, t);
 		c13.chooseSeats();
-		assertEquals("[1-15B,1-14C,1-13B,1-11B,1-10C,1-9C]", c13.toPrint());
+		assertEquals("[1-9C,1-10C,1-11B,1-13B,1-14C,1-15B]", c13.toPrint());
 		assertEquals(6, t.openFirstClassSeats());
 		
 		ComfortClass c14 = ComfortClass.newReservation(1, t);
@@ -468,7 +469,7 @@ public class ComfortClassTest {
 		
 		//Valid reassignment
 		c1.changeSeats("2-2B,1-17A");
-		assertEquals("[2-2B,1-17A]", c1.toPrint());
+		assertEquals("[1-17A,2-2B]", c1.toPrint());
 		
 	}
 
@@ -486,6 +487,6 @@ public class ComfortClassTest {
 		
 		c = ComfortClass.newReservation(4, t);
 		c.chooseSeats();
-		assertEquals("[1-17A,1-17B,1-17C,1-16A]", c.toPrint());
+		assertEquals("[1-16A,1-17A,1-17B,1-17C]", c.toPrint());
 	}
 }

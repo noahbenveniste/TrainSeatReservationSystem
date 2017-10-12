@@ -13,7 +13,7 @@ public class SeatTest {
 	private static final String LABEL = "1A";
 	private static final int CAR_NUMBER = 1;
 	private static final String ACTUAL_STRING = "1-1A";
-	private static final String ACTUAL_STRING_LIST = "[1-1A,1-1B,1-1C]";
+	private static final String ACTUAL_STRING_LIST = "[1-1A,1-1B,1-1C,1-2A,2-2A,2-2B]";
 	
 	/**
 	 * Test method for the Seat constructor
@@ -96,10 +96,13 @@ public class SeatTest {
 	 */
 	@Test
 	public void testPrintListOfSeats() {
-		Seat[] seats = new Seat[3];
-		seats[0] = new Seat(LABEL, CAR_NUMBER);
-		seats[1] = new Seat("1B", 1);
-		seats[2] = new Seat("1C", 1);
+		Seat[] seats = new Seat[6];
+		seats[1] = new Seat(LABEL, CAR_NUMBER);
+		seats[2] = new Seat("1B", 1);
+		seats[0] = new Seat("1C", 1);
+		seats[5] = new Seat("2A", 1);
+		seats[3] = new Seat("2A", 2);
+		seats[4] = new Seat("2B", 2);
 		assertEquals(ACTUAL_STRING_LIST, Seat.printListOfSeats(seats));
 	}
 

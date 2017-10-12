@@ -1,5 +1,7 @@
 package edu.ncsu.csc216.train_travel.transportation;
 
+import java.util.Arrays;
+
 /**
  * POJO class that represents a Seat object. Stores state for a label in the form of <row number><letter>, 
  * the number of the train car that the seat exists in, as well as the seat's reserved status.
@@ -81,6 +83,8 @@ public class Seat implements Comparable<Seat> {
 	 * @return the list of seats as a string
 	 */
 	public static String printListOfSeats(Seat[] seats) {
+		//Sort the input array
+		Arrays.sort(seats);
 		//Fence-post
 		String out = "[" + seats[0].toString();
 		for (int i = 1; i < seats.length; i++) {
@@ -101,11 +105,33 @@ public class Seat implements Comparable<Seat> {
 	 * int if this Seat comes after the other Seat, or zero if the Seats are equal.
 	 */
 	public int compareTo(Seat o) {
+		String olabel = o.getLabel();
+		int orowNum = 0;
+		char orowLetter;
+		if (olabel.length() == 2) {
+			orowNum = Integer.parseInt("" + olabel.charAt(0));
+		} else if (olabel.length() == 3) {
+			orowNum = Integer.parseInt("" + olabel.charAt(0) + olabel.charAt(1));
+		}
+		orowLetter = olabel.charAt(olabel.length() - 1);
+		
+		String label = this.getLabel();
+		int rowNum = 0;
+		char rowLetter;
+		if (label.length() == 2) {
+			rowNum = Integer.parseInt("" + label.charAt(0));
+		} else if (label.length() == 3) {
+			rowNum = Integer.parseInt("" + label.charAt(0) + label.charAt(1));
+		}
+		rowLetter = label.charAt(label.length() - 1);
+		
 		//First, compare by car number
 		if (this.getTrainCarNumber() != o.getTrainCarNumber()) {
 			return this.getTrainCarNumber() - o.getTrainCarNumber();
-		} else if (!this.getLabel().equals(o.getLabel())) { //If the seats are in the same car, compare by label
-			return this.getLabel().compareTo(o.getLabel());
+		} else if (rowNum != orowNum) {//Compare by row number
+			return rowNum - orowNum;
+		} else if (rowLetter != orowLetter) {//Compare by row letter
+			return rowLetter - orowLetter;
 		} else { //If the seats are in the same car and have the same label, they are the same
 			return 0;
 		}
