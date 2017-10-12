@@ -98,7 +98,9 @@ public class ReservationManagerTest {
 	 */
 	@Test
 	public void testMakeNewReservation() {
-		//fail("Not yet implemented");
+		ReservationManager m = new ReservationManager(4);
+		m.makeNewReservation(1, "Comfort");
+		assertEquals("1000 Comfort Class [1-1A]\n", m.printReservationList());
 	}
 
 	/**
