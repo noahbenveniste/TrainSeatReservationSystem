@@ -101,6 +101,37 @@ public class ReservationManagerTest {
 		ReservationManager m = new ReservationManager(4);
 		m.makeNewReservation(1, "Comfort");
 		assertEquals("1000 Comfort Class [1-1A]\n", m.printReservationList());
+		
+		m.makeNewReservation(1, "e");
+		assertEquals("1000 Comfort Class [1-1A]\n1001 Economy Class [3-19A]\n", m.printReservationList());
+		
+		try {
+			m.makeNewReservation(7, "c");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals("Invalid number of passengers", e.getMessage());
+		}
+		
+		try {
+			m.makeNewReservation(7, "c");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals("Invalid number of passengers", e.getMessage());
+		}
+		
+		try {
+			m.makeNewReservation(7, "e");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals("Invalid number of passengers", e.getMessage());
+		}
+		
+		try {
+			m.makeNewReservation(7, "b");
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertEquals("Invalid number of passengers", e.getMessage());
+		}
 	}
 
 	/**
@@ -112,9 +143,9 @@ public class ReservationManagerTest {
 		m.makeNewReservation(1, "Economy");
 		m.makeNewReservation(1, "Bicycle");
 		m.makeNewReservation(1, "Economy");
-		assertEquals("1000 Economy Class (1)\n1001 Bicycle Class (1)\n1002 Economy Class (1)\n", m.printReservationList());
+		assertEquals("1000 Economy Class [3-19A]\n1001 Bicycle Class (1)\n1002 Economy Class [3-19B]\n", m.printReservationList());
 		m.cancelReservation("1001");
-		assertEquals("1000 Economy Class (1)\n1002 Economy Class (1)\n", m.printReservationList());
+		assertEquals("1000 Economy Class [3-19A]\n1002 Economy Class [3-19B]\n", m.printReservationList());
 		try {
 			m.cancelReservation("1003");
 		} catch (IllegalArgumentException e) {
@@ -155,6 +186,6 @@ public class ReservationManagerTest {
 		m.makeNewReservation(1, "Economy");
 		m.makeNewReservation(1, "Bicycle");
 		m.makeNewReservation(1, "Economy");
-		assertEquals("1000 Economy Class (1)\n1001 Bicycle Class (1)\n1002 Economy Class (1)\n", m.printReservationList());
+		assertEquals("1000 Economy Class [3-19A]\n1001 Bicycle Class (1)\n1002 Economy Class [3-19B]\n", m.printReservationList());
 	}
 }
