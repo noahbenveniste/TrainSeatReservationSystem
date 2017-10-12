@@ -211,38 +211,38 @@ public class Train {
 	}
 	
 	/**
-	 * Determines if the car at the specified ZERO-BASED INDEX is a BicycleTransportCar
-	 * @param carIndex the zero-based index of the car in the car array
+	 * Determines if the car at the specified ID NUMBER is a BicycleTransportCar
+	 * @param carNum the car's ID number
 	 * @return true if the car at the index is a BicycleTransportCar, false otherwise
 	 */
-	public boolean isBicycleCar(int carIndex) {
-		return this.car[carIndex] instanceof BicycleTransportCar;
+	public boolean isBicycleCar(int carNum) {
+		return this.car[carNum - 1] instanceof BicycleTransportCar;
 	}
 	
 	/**
-	 * Determines if the car at the specified ZERO-BASED INDEX is a SecondClassCar
-	 * @param carIndex the zero-based index of the car in the car array
+	 * Determines if the car at the specified ID NUMBER is a SecondClassCar
+	 * @param carNum the car's ID number
 	 * @return true if the car at the index is a SecondClassCar, false otherwise
 	 */
-	public boolean isSecondClassCar(int carIndex) {
-		return this.car[carIndex] instanceof SecondClassCar;
+	public boolean isSecondClassCar(int carNum) {
+		return this.car[carNum - 1] instanceof SecondClassCar;
 	}
 	
 	/**
-	 * Determines if the car at the specified ZERO-BASED INDEX is a FirstClassCar
-	 * @param carIndex the zero-based index of the car in the car array
+	 * Determines if the car at the specified ID NUMBER is a FirstClassCar
+	 * @param carNum the car's ID number
 	 * @return true if the car at the index is a FirstClassCar, false otherwise
 	 */
-	public boolean isFirstClassCar(int carIndex) {
-		return this.car[carIndex] instanceof FirstClassCar;
+	public boolean isFirstClassCar(int carNum) {
+		return this.car[carNum - 1] instanceof FirstClassCar;
 	}
 	
 	/**
-	 * Gets the seat map for the car located at the specified ZERO-BASED INDEX in the car array
-	 * @param carIndex the zero-based index of the car in the car array
+	 * Gets the seat map for the car located at the specified ID NUMBER in the car array
+	 * @param the index of the car in the car array
 	 * @return the seat map for the car as a single string
 	 */
-	public String getCarSeatMap(int carIndex) {
-		return this.car[carIndex].getSeatMap();
+	public String getCarSeatMap(int carNum) {
+		return this.car[carNum].getSeatMap();
 	}
 }

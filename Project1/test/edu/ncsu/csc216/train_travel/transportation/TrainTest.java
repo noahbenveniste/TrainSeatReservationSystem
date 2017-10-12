@@ -22,30 +22,39 @@ public class TrainTest {
 		//Test valid construction of Train at lower boundary length
 		Train t1 = new Train(4);
 		assertEquals(4, t1.numCars());
-		assertTrue(t1.isFirstClassCar(0));
-		assertTrue(t1.isSecondClassCar(1));
+		assertTrue(t1.isFirstClassCar(1));
 		assertTrue(t1.isSecondClassCar(2));
-		assertTrue(t1.isBicycleCar(3));
+		assertTrue(t1.isSecondClassCar(3));
+		assertTrue(t1.isBicycleCar(4));
 		
 		//Test valid construction of Train at middle value length
 		Train t2 = new Train(8);
 		assertEquals(8, t2.numCars());
-		assertTrue(t2.isFirstClassCar(0));
 		assertTrue(t2.isFirstClassCar(1));
-		assertTrue(t2.isSecondClassCar(2));
+		assertTrue(t2.isFirstClassCar(2));
 		assertTrue(t2.isSecondClassCar(3));
 		assertTrue(t2.isSecondClassCar(4));
 		assertTrue(t2.isSecondClassCar(5));
 		assertTrue(t2.isSecondClassCar(6));
-		assertTrue(t2.isBicycleCar(7));
+		assertTrue(t2.isSecondClassCar(7));
+		assertTrue(t2.isBicycleCar(8));
+		
+		Train t6 = new Train(7);
+		assertEquals(7, t6.numCars());
+		assertTrue(t6.isFirstClassCar(1));
+		assertTrue(t6.isFirstClassCar(2));
+		assertTrue(t6.isSecondClassCar(3));
+		assertTrue(t6.isSecondClassCar(4));
+		assertTrue(t6.isSecondClassCar(5));
+		assertTrue(t6.isSecondClassCar(6));
+		assertTrue(t6.isBicycleCar(7));
 		
 		//Test valid construction of Train at upper boundary length
 		Train t3 = new Train(12);
 		assertEquals(12, t3.numCars());
-		assertTrue(t3.isFirstClassCar(0));
 		assertTrue(t3.isFirstClassCar(1));
 		assertTrue(t3.isFirstClassCar(2));
-		assertTrue(t3.isSecondClassCar(3));
+		assertTrue(t3.isFirstClassCar(3));
 		assertTrue(t3.isSecondClassCar(4));
 		assertTrue(t3.isSecondClassCar(5));
 		assertTrue(t3.isSecondClassCar(6));
@@ -53,7 +62,8 @@ public class TrainTest {
 		assertTrue(t3.isSecondClassCar(8));
 		assertTrue(t3.isSecondClassCar(9));
 		assertTrue(t3.isSecondClassCar(10));
-		assertTrue(t3.isBicycleCar(11));
+		assertTrue(t3.isSecondClassCar(11));
+		assertTrue(t3.isBicycleCar(12));
 		
 		//Test invalid construction of Train at lower boundary
 		Train t4 = null;
@@ -95,10 +105,10 @@ public class TrainTest {
 	@Test
 	public void testIsFirstClassCar() {
 		Train t = new Train(4);
-		assertTrue(t.isFirstClassCar(0));
-		assertFalse(t.isFirstClassCar(1));
+		assertTrue(t.isFirstClassCar(1));
 		assertFalse(t.isFirstClassCar(2));
 		assertFalse(t.isFirstClassCar(3));
+		assertFalse(t.isFirstClassCar(4));
 	}
 
 	/**
@@ -107,10 +117,10 @@ public class TrainTest {
 	@Test
 	public void testIsSecondClassCar() {
 		Train t = new Train(4);
-		assertFalse(t.isSecondClassCar(0));
-		assertTrue(t.isSecondClassCar(1));
+		assertFalse(t.isSecondClassCar(1));
 		assertTrue(t.isSecondClassCar(2));
-		assertFalse(t.isSecondClassCar(3));
+		assertTrue(t.isSecondClassCar(3));
+		assertFalse(t.isSecondClassCar(4));
 	}
 
 	/**
@@ -119,10 +129,10 @@ public class TrainTest {
 	@Test
 	public void testIsBicycleCar() {
 		Train t = new Train(4);
-		assertFalse(t.isBicycleCar(0));
 		assertFalse(t.isBicycleCar(1));
 		assertFalse(t.isBicycleCar(2));
-		assertTrue(t.isBicycleCar(3));
+		assertFalse(t.isBicycleCar(3));
+		assertTrue(t.isBicycleCar(4));
 	}
 
 	/**
