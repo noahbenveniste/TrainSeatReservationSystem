@@ -110,6 +110,7 @@ public abstract class Reservation {
 		
 		while(lineReader.hasNext()) {
 			String current = lineReader.next();
+			current = current.trim(); //Get rid of excess whitespace
 			
 			if (!current.matches(regex)) {
 				lineReader.close();

@@ -467,6 +467,8 @@ public class ComfortClassTest {
 		}
 		
 		//Valid reassignment
+		c1.changeSeats("2-2B,1-17A");
+		assertEquals("[2-2B,1-17A]", c1.toPrint());
 		
 	}
 
