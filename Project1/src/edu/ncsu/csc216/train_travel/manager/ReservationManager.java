@@ -69,14 +69,13 @@ public class ReservationManager implements TicketMaster {
 		if (kind.toLowerCase().charAt(0) == 'f' || kind.toLowerCase().charAt(0) == 'c') {
 			try {
 				r = ComfortClass.newReservation(numPassengers, this.theTrain);
-				r.chooseSeats();
+				
 			} catch (IllegalArgumentException e) {
 				throw new IllegalArgumentException(e.getMessage());
 			}
 		} else if (kind.toLowerCase().charAt(0) == 's' || kind.toLowerCase().charAt(0) == 'e') {
 			try {
 				r = EconomyClass.newReservation(numPassengers, this.theTrain);
-				r.chooseSeats();
 			} catch (IllegalArgumentException e) {
 				throw new IllegalArgumentException(e.getMessage());
 			}

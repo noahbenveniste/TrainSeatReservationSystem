@@ -20,6 +20,7 @@ public class ComfortClass extends Reservation {
 	 */
 	private ComfortClass(int numPassengers, Train myTrain) {
 		super(numPassengers, myTrain);
+		this.chooseSeats();
 		myTrain.incComfortClassPassengers(numPassengers);
 	}
 	
