@@ -107,7 +107,7 @@ public abstract class TrainCar {
 						s += "[ x ]";
 					}
 				} else { //If the column iteration is on the aisle, print empty space and then the seat at the index in the seat array
-					s += "    ";
+					s += "   ";
 					//Check if the seat is reserved or not
 					if (!seats[i][j].isReserved()) {
 						//Label consists of a one digit number and a letter
