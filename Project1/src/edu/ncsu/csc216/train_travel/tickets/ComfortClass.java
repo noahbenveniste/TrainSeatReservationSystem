@@ -50,6 +50,15 @@ public class ComfortClass extends Reservation {
 			throw new IllegalArgumentException("Not enough open seats");
 		}
 		
+		/*
+		//Release all the seats so if the method is called twice, nothing is affected
+		if (this.theSeats.length != 0 ) {
+			for (int i = 0; i < this.theSeats.length; i++) {
+				this.theSeats[i].release();
+			}
+		}
+		*/
+		
 		//If the number of passengers is 1, try the preferred single passenger seating
 		if (this.getNumPassengers() == 1) {
 			if (this.tryOnePassengerPreferredSeating()) {

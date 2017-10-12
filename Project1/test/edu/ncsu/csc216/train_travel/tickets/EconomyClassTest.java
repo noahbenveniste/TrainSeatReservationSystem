@@ -119,6 +119,7 @@ public class EconomyClassTest {
 		Train t = new Train(4);
 		
 		EconomyClass c1 = EconomyClass.newReservation(1, t);
+		c1.chooseSeats();
 		assertEquals(1000, c1.getID());
 		assertEquals(151, t.openSecondClassSeats());
 		assertTrue(t.hasEconomyClassRoomFor(185));
@@ -129,8 +130,8 @@ public class EconomyClassTest {
 		assertFalse(t.hasEconomyClassRoomFor(187));
 		
 		
-		/*
 		EconomyClass c2 = EconomyClass.newReservation(6, t);
+		c2.chooseSeats();
 		assertEquals(1001, c2.getID());
 		assertEquals(146, t.openSecondClassSeats());
 		assertTrue(t.hasEconomyClassRoomFor(180));
@@ -139,7 +140,6 @@ public class EconomyClassTest {
 		assertEquals(152, t.openSecondClassSeats());
 		assertTrue(t.hasEconomyClassRoomFor(186));
 		assertFalse(t.hasEconomyClassRoomFor(187));
-		*/
 	}
 
 	/**
@@ -149,11 +149,13 @@ public class EconomyClassTest {
 	public void testChooseSeats() {
 		Train t = new Train(4); //Has two second class cars
 		EconomyClass c = EconomyClass.newReservation(1, t);
+		c.chooseSeats();
 		assertEquals(1000, c.getID());
 		assertEquals("1000 Economy Class [3-19A]", c.toPrint());
 		assertEquals(151, t.openSecondClassSeats());
 		
 		EconomyClass c1 = EconomyClass.newReservation(6, t);
+		c1.chooseSeats();
 		assertEquals(1001, c1.getID());
 		assertEquals("1001 Economy Class [3-18A,3-18B,3-18C,3-19B,3-19C,3-19D]", c1.toPrint());
 	}
@@ -165,6 +167,7 @@ public class EconomyClassTest {
 	public void testChangeSeats() {
 		Train t = new Train(4);
 		EconomyClass c = EconomyClass.newReservation(1, t);
+		c.chooseSeats();
 		String invalid;
 		
 		invalid = "";
@@ -249,6 +252,7 @@ public class EconomyClassTest {
 		
 		Train t1 = new Train(7);
 		EconomyClass c1 = EconomyClass.newReservation(2, t1);
+		c1.chooseSeats();
 		
 		invalid = "1-2A,3-2A";
 		try {
@@ -307,9 +311,11 @@ public class EconomyClassTest {
 		EconomyClass c = null;
 		
 		c = EconomyClass.newReservation(1, t);
+		c.chooseSeats();
 		assertEquals("1000 Economy Class [3-19A]", c.toPrint());
 		
 		c = EconomyClass.newReservation(4, t);
+		c.chooseSeats();
 		assertEquals("1001 Economy Class [3-18A,3-19B,3-19C,3-19D]", c.toPrint());
 	}
 }
