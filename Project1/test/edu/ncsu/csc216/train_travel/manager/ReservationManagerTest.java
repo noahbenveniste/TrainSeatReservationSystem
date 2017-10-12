@@ -7,6 +7,7 @@ import java.lang.reflect.Field;
 import org.junit.Before;
 import org.junit.Test;
 
+import edu.ncsu.csc216.train_travel.tickets.EconomyClass;
 import edu.ncsu.csc216.train_travel.tickets.Reservation;
 
 /**
@@ -102,7 +103,8 @@ public class ReservationManagerTest {
 		m.makeNewReservation(1, "Comfort");
 		assertEquals("1000 Comfort Class [1-1A]\n", m.printReservationList());
 		
-		m.makeNewReservation(1, "e");
+		Reservation r1 = m.makeNewReservation(1, "e");
+		r1.chooseSeats();
 		assertEquals("1000 Comfort Class [1-1A]\n1001 Economy Class [3-19A]\n", m.printReservationList());
 		
 		try {
@@ -140,9 +142,11 @@ public class ReservationManagerTest {
 	@Test
 	public void testCancelReservation() {
 		ReservationManager m = new ReservationManager(4);
-		m.makeNewReservation(1, "Economy");
+		Reservation r1 = m.makeNewReservation(1, "Economy");
+		r1.chooseSeats();
 		m.makeNewReservation(1, "Bicycle");
-		m.makeNewReservation(1, "Economy");
+		Reservation r2 = m.makeNewReservation(1, "Economy");
+		r2.chooseSeats();
 		assertEquals("1000 Economy Class [3-19A]\n1001 Bicycle Class (1)\n1002 Economy Class [3-19B]\n", m.printReservationList());
 		m.cancelReservation("1001");
 		assertEquals("1000 Economy Class [3-19A]\n1002 Economy Class [3-19B]\n", m.printReservationList());
@@ -183,9 +187,11 @@ public class ReservationManagerTest {
 	@Test
 	public void testPrintReservationList() {
 		ReservationManager m = new ReservationManager(4);
-		m.makeNewReservation(1, "Economy");
+		Reservation r1 = m.makeNewReservation(1, "Economy");
+		r1.chooseSeats();
 		m.makeNewReservation(1, "Bicycle");
-		m.makeNewReservation(1, "Economy");
+		Reservation r2 = m.makeNewReservation(1, "Economy");
+		r2.chooseSeats();
 		assertEquals("1000 Economy Class [3-19A]\n1001 Bicycle Class (1)\n1002 Economy Class [3-19B]\n", m.printReservationList());
 	}
 }
