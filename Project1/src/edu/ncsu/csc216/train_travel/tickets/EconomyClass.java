@@ -1,6 +1,7 @@
 package edu.ncsu.csc216.train_travel.tickets;
 
 import edu.ncsu.csc216.train_travel.transportation.Seat;
+import edu.ncsu.csc216.train_travel.transportation.SecondClassCar;
 import edu.ncsu.csc216.train_travel.transportation.Train;
 
 /**
@@ -47,9 +48,33 @@ public class EconomyClass extends Reservation {
 	@Override
 	public void chooseSeats() {
 		//First, check that there is enough unreserved seats in all SecondClassCars in myTrain. Throw an IAE if not.
-		
+		if (myTrain.openSecondClassSeats() < this.getNumPassengers()) {
+			throw new IllegalArgumentException("Not enough open seats");
+		}
 		//Start in seat 19A in the last SecondClassCar, indexing right across the row until all seats are assigned. Proceed up through
 		//all rows in the car until all seats are found, or into the next car if the previous one is full
+		int numFirstClassCars = (myTrain.numCars() - 1) / 3;
+		int numSecondClassCars = myTrain.numCars() - numFirstClassCars - 1;
+		this.theSeats = new Seat[this.getNumPassengers()];
+		int idx = 0;
+		
+		//Start from seat 17A in the last SecondClassCar, indexing left to right, back to front of each car until all seats are assigned
+		for (int i = (numSecondClassCars + numFirstClassCars) - 1; i > (numFirstClassCars - 1); i--) {
+			for (int j = SecondClassCar.getNumRows() - 1; j >= 0; j--) { //Seat row loop, start in the last row
+				for (int k = 0; k < SecondClassCar.getNumSeatsPerRow(); k++) { //Seat loop, start in the A seat
+					//If the currently indexed seat is unreserved, reserve it, add it to arr, increment the index counter
+					if (!(myTrain.getSeatFor(i, j, k).isReserved())) {
+						myTrain.getSeatFor(i, j, k).reserve();
+						theSeats[idx] = myTrain.getSeatFor(i, j, k);
+						idx++;
+					}
+					//If all seats have been found for the number of passengers in the reservation, break out
+					if (idx == this.getNumPassengers()) {
+						return;
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -59,10 +84,27 @@ public class EconomyClass extends Reservation {
 	 */
 	@Override
 	public void changeSeats(String seatString) {
-		//Parse the seat string to get an array of seat objects
-		Seat[] newSeats = this.parseSeats(seatString);
+		int numFirstClassCars = (myTrain.numCars() - 1) / 3;
+		int numSecondClassCars = myTrain.numCars() - numFirstClassCars - 1;
+		Seat[] newSeats = null;
+		//Throw an IAE if the string cannot be parsed
+		try {
+			newSeats = this.parseSeats(seatString);
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
+		//Check that the new seats have valid car numbers for FirstClassCars
+		for (int i = 0; i < newSeats.length; i++) {
+			if (newSeats[i].getTrainCarNumber() <= numFirstClassCars || newSeats[i].getTrainCarNumber() > (numSecondClassCars + numFirstClassCars)) {
+				throw new IllegalArgumentException("Non-second class seat entered");
+			}
+		}
 		//Pass the array of new seats to reserve along with the old seats to reassignSeats()
-		newSeats = this.reassignSeats(this.theSeats, newSeats);
+		try {
+			newSeats = this.reassignSeats(newSeats, this.theSeats);
+		} catch (IllegalArgumentException e) { //Throws an IAE if any of the seats are already reserved or if there are not enough or too many seats
+			throw new IllegalArgumentException(e.getMessage());
+		}
 		//Set theSeats to the newly reserved seats
 		this.theSeats = newSeats;
 	}
