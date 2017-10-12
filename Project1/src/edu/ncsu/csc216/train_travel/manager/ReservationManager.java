@@ -138,7 +138,7 @@ public class ReservationManager implements TicketMaster {
 	public String printReservationList() {
 		String out = "";
 		for (int i = 0; i < theReservations.size(); i++) {
-			out += this.theReservations.get(i).toPrint();
+			out += this.theReservations.get(i).toPrint() + "\n";
 		}
 		return out;
 	}
