@@ -115,6 +115,6 @@ public class SecondClassCar extends TrainCar {
 	 */
 	@Override
 	public String getSeatMap() {
-		return "\nSecond Class Car #" + this.getCarIDNumber() + "\n" + "\n" + drawSeatChart(this.seats, AISLE_INDEX);
+		return "Second Class Car #" + this.getCarIDNumber() + "\n" + "\n" + drawSeatChart(this.seats, AISLE_INDEX);
 	}
 }

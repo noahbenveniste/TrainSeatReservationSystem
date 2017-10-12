@@ -238,7 +238,7 @@ public class Train {
 	}
 	
 	/**
-	 * Gets the seat map for the car located at the specified ID NUMBER in the car array
+	 * Gets the seat map for the car located at the specified INDEX in the car array
 	 * @param the index of the car in the car array
 	 * @return the seat map for the car as a single string
 	 */

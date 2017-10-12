@@ -107,7 +107,7 @@ public class BicycleTransportCarTest {
 	@Test
 	public void testGetSeatMap() {
 		BicycleTransportCar car = new BicycleTransportCar(1);
-		String expected = "\nBicycle Transport Car #1\n Seats cannot be reserved.";
+		String expected = "Bicycle Transport Car #1\n Seats cannot be reserved.";
 		assertEquals(expected, car.getSeatMap());
 	}
 }
