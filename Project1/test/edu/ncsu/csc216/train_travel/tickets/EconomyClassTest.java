@@ -128,6 +128,8 @@ public class EconomyClassTest {
 		assertTrue(t.hasEconomyClassRoomFor(186));
 		assertFalse(t.hasEconomyClassRoomFor(187));
 		
+		
+		/*
 		EconomyClass c2 = EconomyClass.newReservation(6, t);
 		assertEquals(1001, c2.getID());
 		assertEquals(146, t.openSecondClassSeats());
@@ -137,6 +139,7 @@ public class EconomyClassTest {
 		assertEquals(152, t.openSecondClassSeats());
 		assertTrue(t.hasEconomyClassRoomFor(186));
 		assertFalse(t.hasEconomyClassRoomFor(187));
+		*/
 	}
 
 	/**

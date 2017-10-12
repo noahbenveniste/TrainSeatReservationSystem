@@ -115,10 +115,8 @@ public class EconomyClass extends Reservation {
 	 */
 	@Override
 	public void cancel() {
-		if (this.reservedSeats) {
-			for (int i = 0; i < this.theSeats.length; i++) { //If there are reserved seats, loop through theSeats releasing all seats
-				this.theSeats[i].release();
-			}
+		for (int i = 0; i < this.theSeats.length; i++) { //If there are reserved seats, loop through theSeats releasing all seats
+			this.theSeats[i].release();
 		}
 		//Decrement the number of economy class passengers
 		int n = -1*this.getNumPassengers();
