@@ -12,6 +12,8 @@ import edu.ncsu.csc216.train_travel.transportation.Train;
 public class ComfortClass extends Reservation {
 	/** Array of seats for reserved seating assignments */
 	private Seat[] theSeats;
+	/** */
+	private boolean seatsAlreadyChosen;
 
 	/**
 	 * Constructs a new ComfortClass Reservation
@@ -20,6 +22,7 @@ public class ComfortClass extends Reservation {
 	 */
 	private ComfortClass(int numPassengers, Train myTrain) {
 		super(numPassengers, myTrain);
+		seatsAlreadyChosen = false;
 		this.chooseSeats();
 		myTrain.incComfortClassPassengers(numPassengers);
 	}
@@ -45,35 +48,30 @@ public class ComfortClass extends Reservation {
 	 */
 	@Override
 	public void chooseSeats() {
-		//First, check that there is enough FirstClassCar capacity for this Reservation on myTrain. If not, throw an IAE
-		if (myTrain.openFirstClassSeats() < this.getNumPassengers()) {
-			throw new IllegalArgumentException("Not enough open seats");
-		}
-		
-		/*
-		//Release all the seats so if the method is called twice, nothing is affected
-		if (this.theSeats.length != 0 ) {
-			for (int i = 0; i < this.theSeats.length; i++) {
-				this.theSeats[i].release();
+		if (!this.seatsAlreadyChosen) {
+			//First, check that there is enough FirstClassCar capacity for this Reservation on myTrain. If not, throw an IAE
+			if (myTrain.openFirstClassSeats() < this.getNumPassengers()) {
+				throw new IllegalArgumentException("Not enough open seats");
 			}
-		}
-		*/
-		
-		//If the number of passengers is 1, try the preferred single passenger seating
-		if (this.getNumPassengers() == 1) {
-			if (this.tryOnePassengerPreferredSeating()) {
-				this.onePassengerPreferredSeating();
+			//If the number of passengers is 1, try the preferred single passenger seating
+			if (this.getNumPassengers() == 1) {
+				if (this.tryOnePassengerPreferredSeating()) {
+					this.onePassengerPreferredSeating();
+				} else {
+					this.standardAssignmentMethod();
+				}
+			} else if (this.getNumPassengers() == 2) { //If the number of passengers is 2, try the preferred two passenger seating
+				if (this.tryTwoPassengerPreferredSeating()) {
+					this.twoPassengerPreferredSeating();
+				} else {
+					this.standardAssignmentMethod();
+				}
 			} else {
 				this.standardAssignmentMethod();
 			}
-		} else if (this.getNumPassengers() == 2) { //If the number of passengers is 2, try the preferred two passenger seating
-			if (this.tryTwoPassengerPreferredSeating()) {
-				this.twoPassengerPreferredSeating();
-			} else {
-				this.standardAssignmentMethod();
-			}
+			seatsAlreadyChosen = true;
 		} else {
-			this.standardAssignmentMethod();
+			return;
 		}
 	}
 	
