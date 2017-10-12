@@ -21,9 +21,7 @@ public class ReservationManager implements TicketMaster {
 	private Train theTrain;
 	/** ArrayList to store all Reservation objects for the Train, sorted by ID number */
 	private ArrayList<Reservation> theReservations;
-	/** ArrayList used to store the Reservation type at the index corresponding to the Reservation in theReservations */
-	private ArrayList<String> reservationTypes;
-	
+
 	/**
 	 * Constructs a ReservationManager object
 	 * @param numCars the number of cars that the Train object associated with this ReservationManager will have
@@ -36,7 +34,6 @@ public class ReservationManager implements TicketMaster {
 			throw new IllegalArgumentException(e.getMessage());
 		}
 		this.theReservations = new ArrayList<Reservation>();
-		this.reservationTypes = new ArrayList<String>();
 	}
 	
 	/**
@@ -69,7 +66,6 @@ public class ReservationManager implements TicketMaster {
 			throw new IllegalArgumentException("Invalid number of passengers");
 		}
 		Reservation r = null;
-		String type = null;
 		if (kind.toLowerCase().charAt(0) == 'f' || kind.toLowerCase().charAt(0) == 'c') {
 			try {
 				r = ComfortClass.newReservation(numPassengers, this.theTrain);
@@ -77,44 +73,22 @@ public class ReservationManager implements TicketMaster {
 			} catch (IllegalArgumentException e) {
 				throw new IllegalArgumentException(e.getMessage());
 			}
-			type = "Comfort Class";
 		} else if (kind.toLowerCase().charAt(0) == 's' || kind.toLowerCase().charAt(0) == 'e') {
 			try {
 				r = EconomyClass.newReservation(numPassengers, this.theTrain);
 			} catch (IllegalArgumentException e) {
 				throw new IllegalArgumentException(e.getMessage());
 			}
-			type = "Economy Class";
 		} else if (kind.toLowerCase().charAt(0) == 'b') {
 			try {
 				r = BicycleClass.newReservation(numPassengers, this.theTrain);
 			} catch (IllegalArgumentException e) {
 				throw new IllegalArgumentException(e.getMessage());
 			}
-			type = "Bicycle Class";
 		} else {
 			throw new IllegalArgumentException("Invalid reservation type");
 		}
-		/*
-		if (this.theReservations.size() == 0) {
-			this.theReservations.add(r);
-			this.reservationTypes.add(type);
-		} else {
-			for (int i = 0; i < theReservations.size(); i++) {
-				if (this.theReservations.get(i).getID() > r.getID()) {
-					this.theReservations.add(i, r);
-					this.reservationTypes.add(i, type);
-					break;
-				} else {
-					this.theReservations.add(i + 1, r);
-					this.reservationTypes.add(i + 1, type);
-					break;
-				}
-			}
-		}
-		*/
 		this.theReservations.add(this.theReservations.size(), r);
-		this.reservationTypes.add(this.reservationTypes.size(), type);
 		return r;
 	}
 	
@@ -129,7 +103,6 @@ public class ReservationManager implements TicketMaster {
 			if (this.theReservations.get(i).getID() == reservationID) {
 				this.theReservations.get(i).cancel();
 				this.theReservations.remove(i);
-				this.reservationTypes.remove(i);
 				return;
 			}
 		}
@@ -165,7 +138,7 @@ public class ReservationManager implements TicketMaster {
 	public String printReservationList() {
 		String out = "";
 		for (int i = 0; i < theReservations.size(); i++) {
-			out += theReservations.get(i).getID() + " " + reservationTypes.get(i) + " " + theReservations.get(i).toPrint() + "\n";
+			out += this.theReservations.get(i).toPrint();
 		}
 		return out;
 	}

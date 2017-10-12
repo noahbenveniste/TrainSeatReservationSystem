@@ -163,6 +163,6 @@ public class BicycleClassTest {
 	public void testToPrint() {
 		Train t = new Train(4);
 		BicycleClass c = BicycleClass.newReservation(1, t);
-		assertEquals("(1)", c.toPrint());
+		assertEquals("1000 Bicycle Class (1)", c.toPrint());
 	}
 }

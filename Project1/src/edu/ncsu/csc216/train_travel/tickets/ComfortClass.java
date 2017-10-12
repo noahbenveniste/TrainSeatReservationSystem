@@ -176,7 +176,6 @@ public class ComfortClass extends Reservation {
 	 */
 	@Override
 	public void changeSeats(String seatString) {
-		int numFirstClassCars = (myTrain.numCars() - 1) / 3;
 		Seat[] newSeats = null;
 		//Throw an IAE if the string cannot be parsed
 		try {
@@ -186,7 +185,7 @@ public class ComfortClass extends Reservation {
 		}
 		//Check that the new seats have valid car numbers for FirstClassCars
 		for (int i = 0; i < newSeats.length; i++) {
-			if (newSeats[i].getTrainCarNumber() > numFirstClassCars) {
+			if (!(myTrain.isFirstClassCar(newSeats[i].getTrainCarNumber()))) {
 				throw new IllegalArgumentException("Non-first class seat entered");
 			}
 		}
@@ -221,6 +220,6 @@ public class ComfortClass extends Reservation {
 	 */
 	@Override
 	public String toPrint() {
-		return Seat.printListOfSeats(this.theSeats);
+		return "" + this.getID() + " Comfort Class " + Seat.printListOfSeats(this.theSeats);
 	}
 }

@@ -85,8 +85,6 @@ public class EconomyClass extends Reservation {
 	 */
 	@Override
 	public void changeSeats(String seatString) {
-		int numFirstClassCars = (myTrain.numCars() - 1) / 3;
-		int numSecondClassCars = myTrain.numCars() - numFirstClassCars - 1;
 		Seat[] newSeats = null;
 		//Throw an IAE if the string cannot be parsed
 		try {
@@ -94,9 +92,9 @@ public class EconomyClass extends Reservation {
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException(e.getMessage());
 		}
-		//Check that the new seats have valid car numbers for FirstClassCars
+		//Check that the new seats have valid car numbers for SecondClassCars
 		for (int i = 0; i < newSeats.length; i++) {
-			if (newSeats[i].getTrainCarNumber() <= numFirstClassCars || newSeats[i].getTrainCarNumber() > (numSecondClassCars + numFirstClassCars)) {
+			if (!(myTrain.isSecondClassCar(newSeats[i].getTrainCarNumber()))) {
 				throw new IllegalArgumentException("Non-second class seat entered");
 			}
 		}
@@ -133,9 +131,9 @@ public class EconomyClass extends Reservation {
 	@Override
 	public String toPrint() {
 		if (this.reservedSeats) { 
-			return Seat.printListOfSeats(theSeats); //Print format for reserved EconomyClass Reservation
+			return "" + this.getID() + " Economy Class " + Seat.printListOfSeats(theSeats); //Print format for reserved EconomyClass Reservation
 		} else {
-			return "(" + this.getNumPassengers() + ")"; //Print format for unreseved EconomyClass Reservation
+			return "" + this.getID() + " Economy Class " + "(" + this.getNumPassengers() + ")"; //Print format for unreseved EconomyClass Reservation
 		}
 	}
 }

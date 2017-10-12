@@ -150,13 +150,13 @@ public class EconomyClassTest {
 		EconomyClass c = EconomyClass.newReservation(1, t);
 		assertEquals(1000, c.getID());
 		c.chooseSeats();
-		assertEquals("[3-19A]", c.toPrint());
+		assertEquals("1000 Economy Class [3-19A]", c.toPrint());
 		assertEquals(151, t.openSecondClassSeats());
 		
 		EconomyClass c1 = EconomyClass.newReservation(6, t);
 		assertEquals(1001, c1.getID());
 		c1.chooseSeats();
-		assertEquals("[3-18A,3-18B,3-18C,3-19B,3-19C,3-19D]", c1.toPrint());
+		assertEquals("1001 Economy Class [3-18A,3-18B,3-18C,3-19B,3-19C,3-19D]", c1.toPrint());
 	}
 
 	/**
@@ -298,7 +298,7 @@ public class EconomyClassTest {
 		
 		//Valid reassignment
 		c1.changeSeats("4-2B,3-17A");
-		assertEquals("[3-17A,4-2B]", c1.toPrint());
+		assertEquals("1001 Economy Class [3-17A,4-2B]", c1.toPrint());
 	}
 
 	/**
@@ -311,10 +311,10 @@ public class EconomyClassTest {
 		
 		c = EconomyClass.newReservation(1, t);
 		c.chooseSeats();
-		assertEquals("[3-19A]", c.toPrint());
+		assertEquals("1000 Economy Class [3-19A]", c.toPrint());
 		
 		c = EconomyClass.newReservation(4, t);
 		c.chooseSeats();
-		assertEquals("[3-18A,3-19B,3-19C,3-19D]", c.toPrint());
+		assertEquals("1001 Economy Class [3-18A,3-19B,3-19C,3-19D]", c.toPrint());
 	}
 }

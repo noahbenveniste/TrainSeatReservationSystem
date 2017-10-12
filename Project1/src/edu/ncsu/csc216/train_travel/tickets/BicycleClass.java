@@ -67,7 +67,6 @@ public class BicycleClass extends Reservation {
 	 */
 	@Override
 	public String toPrint() {
-		return "(" + this.getNumPassengers() + ")";
+		return "" + this.getID() + " Bicycle Class " + "(" + this.getNumPassengers() + ")";
 	}
-
 }
