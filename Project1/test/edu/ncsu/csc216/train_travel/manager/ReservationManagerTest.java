@@ -15,7 +15,7 @@ public class ReservationManagerTest {
 	 */
 	@Test
 	public void testReservationManager() {
-		fail("Not yet implemented");
+		fail();
 	}
 
 	/**

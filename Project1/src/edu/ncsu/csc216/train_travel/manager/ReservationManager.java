@@ -148,10 +148,9 @@ public class ReservationManager implements TicketMaster {
 	 * @return the list of Reservations as a string
 	 */
 	public String printReservationList() {
-		//Fencepost
-		String out = "" + theReservations.get(0).getID() + " " + reservationTypes.get(0) + " " + theReservations.get(0).toPrint();
+		String out = "";
 		for (int i = 1; i < theReservations.size(); i++) {
-			out += "\n" + theReservations.get(i).getID() + " " + reservationTypes.get(i) + " " + theReservations.get(i).toPrint();
+			out += theReservations.get(i).getID() + " " + reservationTypes.get(i) + " " + theReservations.get(i).toPrint() + "\n";
 		}
 		return out;
 	}

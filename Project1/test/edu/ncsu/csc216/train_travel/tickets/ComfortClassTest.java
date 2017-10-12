@@ -7,7 +7,6 @@ import java.lang.reflect.Field;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.ncsu.csc216.train_travel.transportation.Seat;
 import edu.ncsu.csc216.train_travel.transportation.Train;
 
 /**
@@ -38,6 +37,7 @@ public class ComfortClassTest {
 	@Test
 	public void testNewReservation() {
 		Train t = new Train(4);
+		
 		
 		//Try creating a reservation with too few passengers
 		ComfortClass c = null;

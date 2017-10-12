@@ -40,7 +40,7 @@ public class BicycleClass extends Reservation {
 	 */
 	@Override
 	public void chooseSeats() throws IllegalArgumentException {
-		throw new IllegalArgumentException();
+		throw new IllegalArgumentException("Cannot reserve seats in a Bicycle Car");
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class BicycleClass extends Reservation {
 	 */
 	@Override
 	public void changeSeats(String s) throws IllegalArgumentException {
-		throw new IllegalArgumentException();
+		throw new IllegalArgumentException("Cannot reserve seats in a Bicycle Car");
 	}
 
 	/**
