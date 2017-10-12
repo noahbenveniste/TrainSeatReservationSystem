@@ -456,6 +456,14 @@ public class ComfortClassTest {
 		c1.changeSeats("2-2B,1-17A");
 		assertEquals("1001 Comfort Class [1-17A,2-2B]", c1.toPrint());
 		
+		//Try changing seats with a seat that's already in the reservation
+		Train t2 = new Train(4);
+		ComfortClass c2 = ComfortClass.newReservation(3, t2);
+		try {
+			c2.changeSeats("1-1A,1-17B,1-16A");
+		} catch (IllegalArgumentException e) {
+			fail();
+		}
 	}
 
 	/**
