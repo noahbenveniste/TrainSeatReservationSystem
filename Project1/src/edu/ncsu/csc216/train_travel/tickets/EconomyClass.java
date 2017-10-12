@@ -36,6 +36,7 @@ public class EconomyClass extends Reservation {
 	 * cannot accommodate them
 	 */
 	public static EconomyClass newReservation(int numPassengers, Train myTrain) {
+		System.out.println("" + numPassengers +  " " + myTrain.numCars() + " " + myTrain.openFirstClassSeats() + " " + myTrain.openSecondClassSeats());
 		if (!Reservation.numPassengersInRange(numPassengers) || !myTrain.hasEconomyClassRoomFor(numPassengers)) {
 			throw new IllegalArgumentException();
 		}
