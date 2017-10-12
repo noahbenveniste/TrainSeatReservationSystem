@@ -139,13 +139,19 @@ public class ReservationManager implements TicketMaster {
 	 * Changes seats for a Reservation
 	 * @param reservationString the Reservation to be changed
 	 * @param newSeats the new seats for the indicated Reservation
+	 * @throws IllegalArgumentException if the indicated reservation does not exist or the seats to change are invalid
 	 */
 	public void changeSeats(String reservationIDString, String newSeats) {
 		int reservationID = Integer.parseInt("" + reservationIDString.charAt(0) + reservationIDString.charAt(1) + 
 				reservationIDString.charAt(2) + reservationIDString.charAt(3));
 		for (int i = 0; i < this.theReservations.size(); i++) {
 			if (this.theReservations.get(i).getID() == reservationID) {
-				this.theReservations.get(i).changeSeats(newSeats);
+				try {
+					this.theReservations.get(i).changeSeats(newSeats);
+				} catch (IllegalArgumentException e) {
+					throw new IllegalArgumentException(e.getMessage());
+				}
+				return;
 			}
 		}
 		throw new IllegalArgumentException("No reservation with the specified ID exists");

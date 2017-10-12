@@ -36,7 +36,23 @@ public class ReservationManagerTest {
 	 */
 	@Test
 	public void testReservationManager() {
-		//fail();
+		//Invalid construction
+		ReservationManager m1 = null;
+		try {
+			m1 = new ReservationManager(1);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(m1);
+		}
+		try {
+			m1 = new ReservationManager(13);
+			fail();
+		} catch (IllegalArgumentException e) {
+			assertNull(m1);
+		}
+		//Valid Construction
+		ReservationManager m3 = new ReservationManager(4);
+		assertEquals(4, m3.numberOfSeatMaps());
 	}
 
 	/**
@@ -109,7 +125,23 @@ public class ReservationManagerTest {
 	 */
 	@Test
 	public void testChangeSeats() {
-		//fail("Not yet implemented");
+		ReservationManager m = new ReservationManager(4);
+		m.makeNewReservation(1, "Economy");
+		m.makeNewReservation(1, "Bicycle");
+		m.makeNewReservation(1, "Economy");
+		//Try changing seats for a reservation that doesn't exist
+		try {
+			m.changeSeats("1003", "1-1A");
+		} catch (IllegalArgumentException e) {
+			assertEquals("No reservation with the specified ID exists", e.getMessage());
+		}
+		//Try changing seats with an invalid input
+		try {
+			m.changeSeats("1000", "fdafdasf");
+		} catch (IllegalArgumentException e) {
+			assertEquals("Input is improperly formatted", e.getMessage());
+		}
+		//Valid change
 	}
 
 	/**
