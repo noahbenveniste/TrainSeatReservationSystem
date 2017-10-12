@@ -1,5 +1,7 @@
 package edu.ncsu.csc216.train_travel.tickets;
 
+import java.util.Arrays;
+
 import edu.ncsu.csc216.train_travel.transportation.FirstClassCar;
 import edu.ncsu.csc216.train_travel.transportation.Seat;
 import edu.ncsu.csc216.train_travel.transportation.Train;
@@ -229,6 +231,7 @@ public class ComfortClass extends Reservation {
 	@Override
 	public String toPrint() {
 		//Sort array first, send to print list of seats
+		Arrays.sort(theSeats);
 		return "" + this.getID() + " Comfort Class " + Seat.printListOfSeats(this.theSeats);
 	}
 }

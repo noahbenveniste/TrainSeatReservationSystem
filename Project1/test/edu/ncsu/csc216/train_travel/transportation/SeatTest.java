@@ -13,7 +13,7 @@ public class SeatTest {
 	private static final String LABEL = "1A";
 	private static final int CAR_NUMBER = 1;
 	private static final String ACTUAL_STRING = "1-1A";
-	private static final String ACTUAL_STRING_LIST = "[1-1A,1-1B,1-1C,1-2A,2-2A,2-2B]";
+	private static final String ACTUAL_STRING_LIST = "[1-1C,1-1A,1-1B,2-2A,2-2B,1-2A]";
 	
 	/**
 	 * Test method for the Seat constructor

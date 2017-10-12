@@ -83,8 +83,6 @@ public class Seat implements Comparable<Seat> {
 	 * @return the list of seats as a string
 	 */
 	public static String printListOfSeats(Seat[] seats) {
-		//Sort the input array
-		Arrays.sort(seats);
 		//Fence-post
 		String out = "[" + seats[0].toString();
 		for (int i = 1; i < seats.length; i++) {

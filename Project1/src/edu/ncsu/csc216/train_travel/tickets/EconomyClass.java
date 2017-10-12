@@ -1,5 +1,7 @@
 package edu.ncsu.csc216.train_travel.tickets;
 
+import java.util.Arrays;
+
 import edu.ncsu.csc216.train_travel.transportation.Seat;
 import edu.ncsu.csc216.train_travel.transportation.SecondClassCar;
 import edu.ncsu.csc216.train_travel.transportation.Train;
@@ -129,6 +131,8 @@ public class EconomyClass extends Reservation {
 	@Override
 	public String toPrint() {
 		if (this.reservedSeats) { 
+			//Sort the seats first, then pass to printListOfSeats()
+			Arrays.sort(theSeats);
 			return "" + this.getID() + " Economy Class " + Seat.printListOfSeats(theSeats); //Print format for reserved EconomyClass Reservation
 		} else {
 			return "" + this.getID() + " Economy Class " + "(" + this.getNumPassengers() + ")"; //Print format for unreseved EconomyClass Reservation
