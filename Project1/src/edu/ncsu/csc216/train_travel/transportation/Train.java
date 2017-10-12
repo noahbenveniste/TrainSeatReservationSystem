@@ -56,7 +56,7 @@ public class Train {
 	/**
 	 * Private helper method that initializes that car array with the proper number of
 	 * each car type based on the length of the train, as defined by UC1,S2
-	 * @param numberOfCars
+	 * @param numberOfCars the number of cars the train should have
 	 */
 	private void setCar(int numberOfCars) {
 		this.car = new TrainCar[numberOfCars];
@@ -119,11 +119,18 @@ public class Train {
 	 * @return the seat located at row,col in the specified car
 	 * @throws IllegalArgumentException if row,col is out of bounds or carNum is out of bounds
 	 */
-	public Seat getSeatFor(int carNum, int row, int col) throws IllegalArgumentException {
+	public Seat getSeatFor(int carNum, int row, int col) {
 		if (carNum < 0 || carNum >= car.length) { //Check that the carNum index is in range
 			throw new IllegalArgumentException();
 		}
-		return this.car[carNum].seatFor(row, col); //Throws IAE if row,col out of bounds for the seating array
+		Seat s = null;
+		try { //Throws IAE if row,col out of bounds for the seating array
+			s = this.car[carNum].seatFor(row, col); 
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
+		return s;
+	
 	}
 	
 	/**
@@ -134,11 +141,17 @@ public class Train {
 	 * @throws IllegalArgumentException if the seat label is invalid for the specified car or
 	 * if carNum is out of bounds
 	 */
-	public Seat getSeatFor(int carNum, String label) throws IllegalArgumentException {
+	public Seat getSeatFor(int carNum, String label) {
 		if (carNum < 0 || carNum >= car.length) { //Check that the carNum index is in range
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Invalid car number");
 		}
-		return this.car[carNum].seatFor(label); //Throws IAE if label is improper for the car or invalid form
+		Seat s = null;
+		try { //Throws an IAE if the label is improper for the car
+			s = this.car[carNum].seatFor(label);
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
+		return s;
 	}
 	
 	/**

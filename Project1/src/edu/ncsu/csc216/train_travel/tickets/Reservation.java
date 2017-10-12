@@ -95,31 +95,40 @@ public abstract class Reservation {
 	 * dictated by UC7,S2-3
 	 * @param seatString a string representing a list of seats
 	 * @return an array of Seats corresponding to the input string
+	 * @throws IllegalArgumentException if the seat string is not formatted properly 
 	 */
 	protected Seat[] parseSeats(String seatString) {
+		//if (!this.seatStringValidator(seatString)) {
+		//	throw new IllegalArgumentException("Seat string is invalid");
+		//}
 		//Construct a scanner for the input string, tokenizing on commas
 		Scanner lineReader = new Scanner(seatString);
 		lineReader.useDelimiter(",");
 		
 		ArrayList<Seat> tempArray = new ArrayList<Seat>();
+		String regex = "\\d{1,2}-\\d{1,2}[A-D]";
 		
 		while(lineReader.hasNext()) {
 			String current = lineReader.next();
 			
-			//Get the carNum
-			String carNumString = "";
-			for (int i = 0; i < current.indexOf("-"); i++) {
-				carNumString += current.charAt(i);
-			}
-			int carNum = Integer.parseInt(carNumString);
-			
-			//Get the seat label; start at the second index, skipping the car number and the dash
-			String label = "";
-			for (int i = (current.indexOf('-') + 1); i < current.length(); i++) {
-				label += current.charAt(i);
+			if (!current.matches(regex)) {
+				lineReader.close();
+				throw new IllegalArgumentException("Input is improperly formatted");
 			}
 			
-			tempArray.add(new Seat(label, carNum));
+			String[] s = current.split("-");
+			int carNum = Integer.parseInt(s[0]);
+			String label = s[1];
+			
+			Seat seat = null;
+			try {
+				seat = myTrain.getSeatFor(carNum-1, label);
+			} catch (IllegalArgumentException e) {
+				lineReader.close();
+				throw new IllegalArgumentException(e.getMessage());
+			}
+			
+			tempArray.add(seat);
 		}
 		lineReader.close();
 		
@@ -134,20 +143,29 @@ public abstract class Reservation {
 	 * Reserves new seats for this Reservation and releases any that are currently reserved
 	 * @param seatsToReserve an array containing the Seat objects to be reserved to this Reservation
 	 * @param currentSeatArray the current array of seats
-	 * @return the updated array of seats
-	 * @throws IllegalArgumentException if the seats to reserve are invalid
+	 * @return the updated array of seats from theSeats
+	 * @throws IllegalArgumentException if the seats to reserve are already reserve or there aren't enough seats
 	 */
 	protected Seat[] reassignSeats(Seat[] seatsToReserve, Seat[] currentSeatArray) {
 		//Check that the new seats are valid
-		
+		//Check if there are enough seats passed for all the passengers included in the reservation or if there are too many
+		if (seatsToReserve.length != this.getNumPassengers()) {
+			throw new IllegalArgumentException("There are " + this.getNumPassengers() + 
+					" passengers but " + seatsToReserve.length + " seats were entered");
+		}
+		//Check that all of the seats are unreserved
+		for (int i = 0; i < seatsToReserve.length; i++) {
+			if (seatsToReserve[i].isReserved()) {
+				throw new IllegalArgumentException("One or more of the seats entered are already reserved");
+			}
+		}
 		//Loop through the current seating array, releasing all reserved seats
 		for (int i = 0; i < currentSeatArray.length; i++) {
 			currentSeatArray[i].release();
 		}
 		//Loop through the seats to reserve array, reserving all seats and then returning the array
 		for (int i = 0; i < seatsToReserve.length; i++) {
-			//Check that the currently indexed seat is not 
-			seatsToReserve[i].reserve();
+			
 		}
 		return seatsToReserve;
 	}

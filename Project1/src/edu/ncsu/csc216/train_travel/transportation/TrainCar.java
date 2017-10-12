@@ -136,12 +136,12 @@ public abstract class TrainCar {
 	 * @return the seat at the given label in the array of seats
 	 * @throws IllegalArgumentException if the label is improper for the car
 	 */
-	protected Seat seatFor(String label, Seat[][] seats) throws IllegalArgumentException {
+	protected Seat seatFor(String label, Seat[][] seats) {
 		if (this.seatLabelValidator(label, seats.length, seats[0].length)) {
 			int[] idx = this.parseLabel(label);
 			return seats[idx[0]][idx[1]];
 		} else {
-			throw new IllegalArgumentException("Invalid seat label");
+			throw new IllegalArgumentException("Invalid seat label for car");
 		}
 	}
 	
@@ -172,6 +172,8 @@ public abstract class TrainCar {
 	 * the car. The letter must be between A and C if the car has three seats per row and between
 	 * A and D if the car has four seats per row.
 	 * @param label the label to validate
+	 * @param numRow the number of rows in the car
+	 * @param numSeatsPerRow the number of seats per row in the car
 	 * @return true if the label is valid
 	 */
 	private boolean seatLabelValidator(String label, int numRow, int numSeatsPerRow) {

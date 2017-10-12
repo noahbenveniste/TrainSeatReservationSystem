@@ -85,7 +85,7 @@ public class SecondClassCar extends TrainCar {
 	@Override
 	public Seat seatFor(int row, int col) {
 		if (row < 0 || row >= NUM_ROWS || col < 0 || col >= NUM_SEATS_PER_ROW) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Row or column out of bounds");
 		} else {
 			return this.seats[row][col];
 		}
@@ -99,7 +99,13 @@ public class SecondClassCar extends TrainCar {
 	 */
 	@Override
 	public Seat seatFor(String label) {
-		return seatFor(label, this.seats);
+		Seat s = null;
+		try {
+			s = seatFor(label, this.seats);
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
+		return s;
 	}
 
 	/**

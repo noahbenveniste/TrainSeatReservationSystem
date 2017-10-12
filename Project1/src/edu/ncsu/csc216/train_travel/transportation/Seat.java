@@ -75,7 +75,7 @@ public class Seat implements Comparable<Seat> {
 	}
 	
 	/**
-	 * Creates a comma-separated list of seats in a Seat array
+	 * Creates a comma-separated list of seats in a Seat array in ascending sorted order
 	 * e.g. if the car number is 3, the form would be "[3-1A, 3-1B, 3-1C...]"
 	 * @param seats the array of seats
 	 * @return the list of seats as a string
