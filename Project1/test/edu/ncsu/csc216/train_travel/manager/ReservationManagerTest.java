@@ -7,7 +7,6 @@ import java.lang.reflect.Field;
 import org.junit.Before;
 import org.junit.Test;
 
-import edu.ncsu.csc216.train_travel.tickets.EconomyClass;
 import edu.ncsu.csc216.train_travel.tickets.Reservation;
 
 /**

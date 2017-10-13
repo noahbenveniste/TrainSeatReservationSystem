@@ -1,7 +1,5 @@
 package edu.ncsu.csc216.train_travel.transportation;
 
-import java.util.Arrays;
-
 /**
  * POJO class that represents a Seat object. Stores state for a label in the form of <row number><letter>, 
  * the number of the train car that the seat exists in, as well as the seat's reserved status.
