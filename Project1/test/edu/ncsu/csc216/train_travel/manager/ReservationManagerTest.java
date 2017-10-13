@@ -163,7 +163,8 @@ public class ReservationManagerTest {
 	@Test
 	public void testChangeSeats() {
 		ReservationManager m = new ReservationManager(4);
-		m.makeNewReservation(1, "Economy");
+		Reservation r = m.makeNewReservation(1, "Economy");
+		r.chooseSeats();
 		m.makeNewReservation(1, "Bicycle");
 		m.makeNewReservation(1, "Economy");
 		//Try changing seats for a reservation that doesn't exist
