@@ -18,17 +18,22 @@ public class EconomyClassTest {
 	/**
 	 * Resets the Reservation ID number to 1000 for the beginning of each test so this value
 	 * will increment in a predictable fashion
-	 * @throws SecurityException 
-	 * @throws NoSuchFieldException 
-	 * @throws IllegalAccessException 
-	 * @throws IllegalArgumentException 
 	 */
 	@Before
-	public void setup() throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void setup() {
 		//Source for this code: https://stackoverflow.com/questions/40515021/resetting-a-private-static-int-from-a-junit-test-class
-		Field number = Reservation.class.getDeclaredField("number");
+		Field number = null;
+		try {
+			number = Reservation.class.getDeclaredField("number");
+		} catch (NoSuchFieldException | SecurityException e) {
+			e.printStackTrace();
+		}
 	    number.setAccessible(true); //to overcome the visibility issue
-	    number.setInt(null, 1000); //null since it's static, reset back to 1000 for each test so Reservation IDs increment in a predictable manner
+	    try {
+			number.setInt(null, 1000); //null since it's static, reset back to 1000 for each test so Reservation IDs increment in a predictable manner
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+		} 
 	}
 	
 	/**
