@@ -38,8 +38,11 @@ public class ComfortClass extends Reservation {
 	 * cannot accommodate them
 	 */
 	public static ComfortClass newReservation(int numPassengers, Train myTrain) {
-		if (!Reservation.numPassengersInRange(numPassengers) || !myTrain.hasComfortClassRoomFor(numPassengers)) {
+		if (!Reservation.numPassengersInRange(numPassengers)) {
 			throw new IllegalArgumentException();
+		}
+		if (!myTrain.hasComfortClassRoomFor(numPassengers)) {
+			throw new IllegalArgumentException("Not enough room in First/Comfort Class");
 		}
 		return new ComfortClass(numPassengers, myTrain);
 	}
