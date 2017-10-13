@@ -111,15 +111,15 @@ public class Seat implements Comparable<Seat> {
 		}
 		orowLetter = olabel.charAt(olabel.length() - 1);
 		
-		String label = this.getLabel();
+		String myLabel = this.getLabel();
 		int rowNum = 0;
 		char rowLetter;
-		if (label.length() == 2) {
-			rowNum = Integer.parseInt("" + label.charAt(0));
-		} else if (label.length() == 3) {
-			rowNum = Integer.parseInt("" + label.charAt(0) + label.charAt(1));
+		if (myLabel.length() == 2) {
+			rowNum = Integer.parseInt("" + myLabel.charAt(0));
+		} else if (myLabel.length() == 3) {
+			rowNum = Integer.parseInt("" + myLabel.charAt(0) + myLabel.charAt(1));
 		}
-		rowLetter = label.charAt(label.length() - 1);
+		rowLetter = myLabel.charAt(myLabel.length() - 1);
 		
 		//First, compare by car number
 		if (this.getTrainCarNumber() != o.getTrainCarNumber()) {

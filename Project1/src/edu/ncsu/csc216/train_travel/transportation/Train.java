@@ -22,11 +22,11 @@ public class Train {
 	private int bicyclePassengers;
 	
 	/** Equal to the sum of the capacities of all FirstClassCars in the Train */
-	private final int TOTAL_COMFORT_CAPACITY;
+	private final int totalComfortCapacity;
 	/** Equal to the sum of all economy car capacities + the bicycle car overflow capacity of 20 */
-	private final int TOTAL_ECONOMY_CAPACITY;
+	private final int totalEconomyCapacity;
 	/** Only one bicycle car per train with a capacity of 20 */
-	private final int TOTAL_BICYCLE_CAPACITY;
+	private final int totalBicycleCapacity;
 	
 	/**
 	 * Constructs a Train object of a specified length with no passengers
@@ -45,11 +45,11 @@ public class Train {
 			this.bicyclePassengers = 0;
 			
 			//Equal to the sum of the capacities of all FirstClassCars in the Train
-			this.TOTAL_COMFORT_CAPACITY = FirstClassCar.getCapacity() * this.numFirstClassCars;
+			this.totalComfortCapacity = FirstClassCar.getCapacity() * this.numFirstClassCars;
 			//Equal to the sum of all economy car capacities + the bicycle car overflow capacity of 20
-			this.TOTAL_ECONOMY_CAPACITY = SecondClassCar.getCapacity() * (this.numCars() - this.numFirstClassCars - 1) + 20;
+			this.totalEconomyCapacity = SecondClassCar.getCapacity() * (this.numCars() - this.numFirstClassCars - 1) + 20;
 			//Only one bicycle car per train with a capacity of 20
-			this.TOTAL_BICYCLE_CAPACITY = 20;
+			this.totalBicycleCapacity = 20;
 		}
 	}
 	
@@ -162,7 +162,7 @@ public class Train {
 	public boolean hasComfortClassRoomFor(int numPassengers) {
 		//Check that the sum of the current number of comfort passengers plus the passengers 
 		//to be added is less than or equal to the total available capacity for comfort class
-		return (this.comfortClassPassengers + numPassengers) <= this.TOTAL_COMFORT_CAPACITY;
+		return (this.comfortClassPassengers + numPassengers) <= this.totalComfortCapacity;
 	}
 	
 	/**
@@ -172,7 +172,7 @@ public class Train {
 	 * @return true if the Train has room for the additional passengers, false otherwise
 	 */
 	public boolean hasEconomyClassRoomFor(int numPassengers) {
-		return (this.econcomyClassPassengers + numPassengers) <= this.TOTAL_ECONOMY_CAPACITY;
+		return (this.econcomyClassPassengers + numPassengers) <= this.totalEconomyCapacity;
 	}
 	
 	/**
@@ -181,7 +181,7 @@ public class Train {
 	 * @return true if the Train has room for the additional passengers, false otherwise
 	 */
 	public boolean hasBicycleCarRoomFor(int numPassengers) {
-		return (this.bicyclePassengers + numPassengers) <= this.TOTAL_BICYCLE_CAPACITY;
+		return (this.bicyclePassengers + numPassengers) <= this.totalBicycleCapacity;
 	}
 	
 	/**
@@ -239,7 +239,7 @@ public class Train {
 	
 	/**
 	 * Gets the seat map for the car located at the specified INDEX in the car array
-	 * @param the index of the car in the car array
+	 * @param carNum the index of the car in the car array
 	 * @return the seat map for the car as a single string
 	 */
 	public String getCarSeatMap(int carNum) {

@@ -94,7 +94,7 @@ public class ReservationManager implements TicketMaster {
 	
 	/**
 	 * Cancels an existing Reservation
-	 * @param reservationString a string corresponding to the Reservation to be cancelled
+	 * @param reservationIDString a string corresponding to the Reservation to be cancelled
 	 */
 	public void cancelReservation(String reservationIDString) {
 		int reservationID = Integer.parseInt("" + reservationIDString.charAt(0) + reservationIDString.charAt(1) + 
@@ -111,7 +111,7 @@ public class ReservationManager implements TicketMaster {
 	
 	/**
 	 * Changes seats for a Reservation
-	 * @param reservationString the Reservation to be changed
+	 * @param reservationIDString the Reservation to be changed
 	 * @param newSeats the new seats for the indicated Reservation
 	 * @throws IllegalArgumentException if the indicated reservation does not exist or the seats to change are invalid
 	 */

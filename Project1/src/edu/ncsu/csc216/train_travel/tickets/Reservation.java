@@ -123,7 +123,7 @@ public abstract class Reservation {
 			
 			Seat seat = null;
 			try {
-				seat = myTrain.getSeatFor(carNum-1, label);
+				seat = myTrain.getSeatFor(carNum - 1, label);
 			} catch (IllegalArgumentException e) {
 				lineReader.close();
 				throw new IllegalArgumentException(e.getMessage());

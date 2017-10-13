@@ -37,8 +37,11 @@ public class EconomyClass extends Reservation {
 	 * cannot accommodate them
 	 */
 	public static EconomyClass newReservation(int numPassengers, Train myTrain) {
-		if (!Reservation.numPassengersInRange(numPassengers) || !myTrain.hasEconomyClassRoomFor(numPassengers)) {
+		if (!Reservation.numPassengersInRange(numPassengers)) {
 			throw new IllegalArgumentException();
+		}
+		if (!myTrain.hasEconomyClassRoomFor(numPassengers)) {
+			throw new IllegalArgumentException("Not enough room in Economy/Second Class");
 		}
 		return new EconomyClass(numPassengers, myTrain);
 	}
@@ -49,11 +52,11 @@ public class EconomyClass extends Reservation {
 	 */
 	@Override
 	public void chooseSeats() {
-		this.reservedSeats = true;
-		//First, check that there is enough unreserved seats in all SecondClassCars in myTrain. Throw an IAE if not.
+		//Check that there is enough unreserved seats in all SecondClassCars in myTrain. Throw an IAE if not.
 		if (myTrain.openSecondClassSeats() < this.getNumPassengers()) {
-			throw new IllegalArgumentException("Not enough open seats");
+			throw new IllegalArgumentException("Not enough open seats in Economy/Second Class");
 		}
+		this.reservedSeats = true;
 		//Start in seat 19A in the last SecondClassCar, indexing right across the row until all seats are assigned. Proceed up through
 		//all rows in the car until all seats are found, or into the next car if the previous one is full
 		int numFirstClassCars = (myTrain.numCars() - 1) / 3;
@@ -124,7 +127,7 @@ public class EconomyClass extends Reservation {
 			this.theSeats[i].release();
 		}
 		//Decrement the number of economy class passengers
-		int n = -1*this.getNumPassengers();
+		int n = -1 * this.getNumPassengers();
 		myTrain.incEconomyClassPassengers(n);
 	}
 

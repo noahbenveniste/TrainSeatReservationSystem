@@ -14,7 +14,7 @@ import edu.ncsu.csc216.train_travel.transportation.Train;
 public class ComfortClass extends Reservation {
 	/** Array of seats for reserved seating assignments */
 	private Seat[] theSeats;
-	/** */
+	/** Flag variable that keeps track of whether or not chooseSeats() was already called on this object */
 	private boolean seatsAlreadyChosen;
 
 	/**
@@ -223,7 +223,7 @@ public class ComfortClass extends Reservation {
 			theSeats[i].release();
 		}
 		//Decrement the number of comfort class passengers on the train
-		int n = -1*this.getNumPassengers();
+		int n = -1 * this.getNumPassengers();
 		myTrain.incComfortClassPassengers(n);
 	}
 

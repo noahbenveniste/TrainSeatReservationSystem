@@ -60,7 +60,7 @@ public class BicycleClass extends Reservation {
 	 */
 	@Override
 	public void cancel() {
-		int n = -1*this.getNumPassengers();
+		int n = -1 * this.getNumPassengers();
 		myTrain.incBicyclePassengers(n);
 	}
 

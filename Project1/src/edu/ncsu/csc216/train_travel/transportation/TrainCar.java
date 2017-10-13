@@ -203,7 +203,7 @@ public abstract class TrainCar {
 			}
 			if (numSeatsPerRow == 3 && label.charAt(2) != 'A' && label.charAt(2) != 'B' && label.charAt(2) != 'C') {
 				return false;
-			} else if (numSeatsPerRow == 4 && label.charAt(2) != 'A' && label.charAt(2) != 'B' && label.charAt(2) != 'C'&& label.charAt(2) != 'D') {
+			} else if (numSeatsPerRow == 4 && label.charAt(2) != 'A' && label.charAt(2) != 'B' && label.charAt(2) != 'C' && label.charAt(2) != 'D') {
 				return false;
 			}
 		}
