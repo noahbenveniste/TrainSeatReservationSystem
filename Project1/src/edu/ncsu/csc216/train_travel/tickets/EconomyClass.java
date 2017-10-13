@@ -87,6 +87,10 @@ public class EconomyClass extends Reservation {
 	 */
 	@Override
 	public void changeSeats(String seatString) {
+		//Add a check that throws an IAE if this reservation did not originally have reserved seats
+		if (!this.reservedSeats) {
+			throw new IllegalArgumentException("Cannot change seats on an Economy/Second Class reservation that has no assigned seats");
+		}
 		Seat[] newSeats = null;
 		//Throw an IAE if the string cannot be parsed
 		try {
